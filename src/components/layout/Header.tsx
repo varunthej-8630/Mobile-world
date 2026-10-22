@@ -24,6 +24,9 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate, onOpenS
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [progressState, setProgressState] = useState(0);
+  const [isMobileView, setIsMobileView] = useState(() => 
+    typeof window !== 'undefined' ? window.innerWidth < 1024 : false
+  );
   const { totalItems, setIsCartOpen } = useCart();
   const { isAuthenticated, user } = useAuth();
 
@@ -137,7 +140,25 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate, onOpenS
     if (typeof window === 'undefined') return;
 
     const scrollY = window.scrollY;
-    setIsScrolled(scrollY > 25);
+    setIsScrolled(scrollY > 20);
+
+    const isMobile = window.innerWidth < 1024;
+    if (isMobile) {
+      if (dockedLogoImgRef.current) dockedLogoImgRef.current.style.opacity = '1';
+      if (headerBrandTextRef.current) headerBrandTextRef.current.style.opacity = '1';
+      if (navActionsRef.current) {
+        navActionsRef.current.style.opacity = '1';
+        navActionsRef.current.style.pointerEvents = 'auto';
+      }
+      if (navRef.current) {
+        navRef.current.style.backgroundColor = scrollY > 20 ? 'rgba(16, 19, 24, 0.95)' : 'rgba(16, 19, 24, 0.88)';
+        navRef.current.style.borderColor = 'rgba(255, 255, 255, 0.16)';
+        navRef.current.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.5)';
+        navRef.current.style.backdropFilter = 'blur(20px)';
+        (navRef.current.style as any).webkitBackdropFilter = 'blur(20px)';
+      }
+      return;
+    }
 
     if (!isHome) {
       if (dockedLogoImgRef.current) dockedLogoImgRef.current.style.opacity = '1';
@@ -240,6 +261,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate, onOpenS
     };
 
     const handleResize = () => {
+      setIsMobileView(window.innerWidth < 1024);
       measure();
       updateMorph();
     };
@@ -248,6 +270,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate, onOpenS
     window.addEventListener('resize', handleResize, { passive: true });
 
     const timer = setTimeout(() => {
+      setIsMobileView(window.innerWidth < 1024);
       measure();
       updateMorph();
     }, 200);
@@ -281,9 +304,9 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate, onOpenS
     <>
       {/* =========================================================================
           THE DEFINING SIGNATURE INTERACTION: SHARED MORPHING COMPACT LOGO LAYER
-          Single continuous Mobile World circular emblem traveling smoothly from hero center to header slot
+          Single continuous Mobile World circular emblem traveling smoothly from hero center to header slot (Desktop)
           ========================================================================= */}
-      {isHome && (
+      {isHome && !isMobileView && (
         <div
           ref={morphLogoRef}
           onClick={() => handleNavClick('/')}
@@ -328,7 +351,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate, onOpenS
           left: 0,
           right: 0,
           zIndex: 50,
-          padding: isScrolled ? '0.75rem 1rem' : '1.25rem 1.5rem',
+          padding: isMobileView ? '0.5rem 0.75rem' : (isScrolled ? '0.75rem 1rem' : '1.25rem 1.5rem'),
           pointerEvents: 'none',
           transition: 'padding 300ms cubic-bezier(0.16, 1, 0.3, 1)'
         }}
@@ -338,26 +361,26 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate, onOpenS
             maxWidth: '1240px',
             margin: '0 auto',
             width: '100%',
-            pointerEvents: isHome && progressState < 0.6 ? 'none' : 'auto'
+            pointerEvents: (!isHome || isMobileView) ? 'auto' : (progressState < 0.6 ? 'none' : 'auto')
           }}
         >
           <nav
             ref={navRef}
             style={{
-              backgroundColor: !isHome
-                ? (isScrolled ? 'rgba(16, 19, 24, 0.88)' : 'rgba(16, 19, 24, 0.68)')
+              backgroundColor: (!isHome || isMobileView)
+                ? (isScrolled ? 'rgba(16, 19, 24, 0.94)' : 'rgba(16, 19, 24, 0.88)')
                 : 'rgba(16, 19, 24, 0)',
-              backdropFilter: !isHome ? 'blur(20px)' : 'none',
-              WebkitBackdropFilter: !isHome ? 'blur(20px)' : 'none',
-              border: !isHome
+              backdropFilter: (!isHome || isMobileView) ? 'blur(20px)' : 'none',
+              WebkitBackdropFilter: (!isHome || isMobileView) ? 'blur(20px)' : 'none',
+              border: (!isHome || isMobileView)
                 ? '1px solid rgba(255, 255, 255, 0.14)'
                 : '1px solid rgba(255, 255, 255, 0)',
               borderRadius: '9999px',
-              padding: isScrolled ? '0.5rem 1.25rem' : '0.65rem 1.5rem',
+              padding: isMobileView ? '0.4rem 0.75rem' : (isScrolled ? '0.5rem 1.25rem' : '0.65rem 1.5rem'),
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              boxShadow: !isHome
+              boxShadow: (!isHome || isMobileView)
                 ? '0 16px 40px rgba(0, 0, 0, 0.45)'
                 : 'none',
               transition: 'padding 300ms cubic-bezier(0.16, 1, 0.3, 1)'
@@ -370,7 +393,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate, onOpenS
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '0.65rem',
+                gap: '0.5rem',
                 flexShrink: 0
               }}
               aria-label="Mobile World Zürich"
@@ -379,8 +402,8 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate, onOpenS
               <div 
                 ref={headerLogoSlotRef}
                 style={{
-                  width: '40px',
-                  height: '40px',
+                  width: isMobileView ? '34px' : '40px',
+                  height: isMobileView ? '34px' : '40px',
                   flexShrink: 0,
                   display: 'flex',
                   alignItems: 'center',
@@ -398,7 +421,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate, onOpenS
                     objectFit: 'contain',
                     display: 'block',
                     filter: 'drop-shadow(0 1px 6px rgba(255, 255, 255, 0.7))',
-                    opacity: !isHome ? 1 : 0,
+                    opacity: (!isHome || isMobileView) ? 1 : 0,
                     transition: 'opacity 150ms ease'
                   }}
                 />
@@ -409,14 +432,14 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate, onOpenS
                 ref={headerBrandTextRef}
                 style={{
                   fontWeight: 700,
-                  fontSize: '1.05rem',
+                  fontSize: isMobileView ? '0.95rem' : '1.05rem',
                   letterSpacing: '-0.02em',
                   color: '#FFFFFF',
                   whiteSpace: 'nowrap',
                   lineHeight: 1,
                   display: 'inline-flex',
                   alignItems: 'center',
-                  opacity: !isHome ? 1 : 0,
+                  opacity: (!isHome || isMobileView) ? 1 : 0,
                   transition: 'opacity 200ms ease'
                 }}
               >
@@ -488,8 +511,9 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate, onOpenS
               style={{ 
                 display: 'flex', 
                 alignItems: 'center', 
-                gap: '0.65rem',
-                opacity: !isHome ? 1 : 0
+                gap: isMobileView ? '0.35rem' : '0.65rem',
+                opacity: (!isHome || isMobileView) ? 1 : 0,
+                pointerEvents: (!isHome || isMobileView) ? 'auto' : 'none'
               }}
             >
               {/* Restrained Search Trigger */}

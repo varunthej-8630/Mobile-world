@@ -144,17 +144,107 @@ export const HomePage: React.FC<HomePageProps> = ({
           style={{
             position: 'relative',
             zIndex: 3,
-            width: 'clamp(170px, 22vw, 240px)',
-            height: 'clamp(170px, 22vw, 240px)',
+            width: 'clamp(140px, 28vw, 240px)',
+            height: 'clamp(140px, 28vw, 240px)',
             aspectRatio: '1 / 1',
-            margin: 'auto',
+            margin: '0 auto',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             pointerEvents: 'none'
           }}
           aria-label="Mobile World Zürich"
-        />
+        >
+          {/* On mobile screens, render the crisp logo directly inside hero */}
+          <img
+            src="/assets/mobile-world-compact-logo.png"
+            alt="Mobile World Zürich"
+            className="block lg:hidden"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'contain',
+              filter: 'drop-shadow(0 4px 18px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 30px rgba(23, 76, 255, 0.4))'
+            }}
+          />
+        </div>
+
+        {/* Mobile Hero Content & Quick Actions */}
+        <div 
+          className="block lg:hidden" 
+          style={{ 
+            position: 'relative', 
+            zIndex: 3, 
+            marginTop: '1.25rem',
+            marginBottom: '2.5rem',
+            maxWidth: '480px',
+            marginInline: 'auto',
+            padding: '0 0.5rem'
+          }}
+        >
+          <span 
+            className="badge badge-blue" 
+            style={{ 
+              marginBottom: '0.75rem',
+              backgroundColor: 'rgba(23, 76, 255, 0.3)',
+              borderColor: 'rgba(78, 128, 255, 0.6)',
+              color: '#FFFFFF'
+            }}
+          >
+            Express-Werkstatt Zürich Seebach
+          </span>
+          <h1 style={{
+            fontSize: 'clamp(1.5rem, 6vw, 2.25rem)',
+            color: '#FFFFFF',
+            fontFamily: 'var(--font-heading)',
+            lineHeight: 1.2,
+            marginBottom: '0.5rem',
+            textShadow: '0 2px 10px rgba(0, 0, 0, 0.6)'
+          }}>
+            Smartphones, Reparaturen &amp; Abos.
+          </h1>
+          <p style={{
+            color: 'rgba(255, 255, 255, 0.9)',
+            fontSize: '0.9rem',
+            lineHeight: 1.5,
+            marginBottom: '1.25rem',
+            textShadow: '0 1px 4px rgba(0, 0, 0, 0.8)'
+          }}>
+            30–60 Min. Sofortreparatur vor Ort · Ohne Voranmeldung
+          </p>
+
+          <div style={{ display: 'flex', gap: '0.65rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <button
+              onClick={() => onNavigate('/repair-prices')}
+              className="btn btn-primary"
+              style={{
+                fontSize: '0.85rem',
+                padding: '0.6rem 1.25rem',
+                borderRadius: '9999px',
+                boxShadow: '0 4px 16px rgba(23, 76, 255, 0.4)'
+              }}
+            >
+              <Wrench size={15} /> Reparaturpreise
+            </button>
+            <a
+              href="https://wa.me/41783448888"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-secondary"
+              style={{
+                fontSize: '0.85rem',
+                padding: '0.6rem 1.15rem',
+                borderRadius: '9999px',
+                backgroundColor: 'rgba(255, 255, 255, 0.18)',
+                color: '#FFFFFF',
+                borderColor: 'rgba(255, 255, 255, 0.35)',
+                backdropFilter: 'blur(10px)'
+              }}
+            >
+              <MessageSquare size={15} color="#10B981" /> WhatsApp
+            </a>
+          </div>
+        </div>
 
         {/* Subtle Location & Public Transport Information Line */}
         <div style={{

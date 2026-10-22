@@ -62,9 +62,9 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose, onNav
   return (
     <div className="modal-backdrop" onClick={onClose}>
       <div 
-        className="modal-content" 
+        className="modal-content p-4 sm:p-6" 
         onClick={(e) => e.stopPropagation()}
-        style={{ maxWidth: '650px', padding: '1.5rem' }}
+        style={{ maxWidth: '650px', maxHeight: '90vh', overflowY: 'auto' }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
           <Search size={22} color="#174CFF" />

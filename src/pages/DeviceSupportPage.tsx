@@ -52,14 +52,14 @@ export const DeviceSupportPage: React.FC<DeviceSupportPageProps> = ({ onNavigate
       <div className="container" style={{ marginTop: '4rem', maxWidth: '1000px' }}>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '2rem',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
+          gap: '1.75rem',
           marginBottom: '4rem'
         }}>
           {supportItems.map((item, i) => {
             const Icon = item.icon;
             return (
-              <div key={i} className="card" style={{ padding: '2.25rem', backgroundColor: '#FFFFFF' }}>
+              <div key={i} className="card p-5 sm:p-7 md:p-8" style={{ backgroundColor: '#FFFFFF' }}>
                 <div style={{
                   backgroundColor: 'rgba(23, 76, 255, 0.1)',
                   color: '#174CFF',
@@ -85,17 +85,19 @@ export const DeviceSupportPage: React.FC<DeviceSupportPageProps> = ({ onNavigate
         </div>
 
         {/* Pricing notice */}
-        <div style={{
-          backgroundColor: '#FFFFFF',
-          borderRadius: '20px',
-          border: '1px solid #DFE3E9',
-          padding: '2.5rem',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: '2rem'
-        }}>
+        <div
+          className="p-5 sm:p-7 md:p-10"
+          style={{
+            backgroundColor: '#FFFFFF',
+            borderRadius: '20px',
+            border: '1px solid #DFE3E9',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: '2rem'
+          }}
+        >
           <div>
             <span className="badge badge-success" style={{ marginBottom: '0.5rem' }}>Faire Festpreise</span>
             <h3 style={{ fontSize: '1.4rem', fontFamily: 'var(--font-heading)', margin: '0.25rem 0' }}>

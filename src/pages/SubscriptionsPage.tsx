@@ -82,17 +82,16 @@ export const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ onOpenEnqu
         {/* Plan Cards Grid */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '2rem',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
+          gap: '1.5rem',
           marginBottom: '5rem'
         }}>
           {filteredPlans.map(plan => (
             <div
               key={plan.id}
-              className="card"
+              className="card p-5 sm:p-7 md:p-8"
               style={{
                 backgroundColor: '#FFFFFF',
-                padding: '2.25rem',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
@@ -203,20 +202,22 @@ export const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ onOpenEnqu
         </div>
 
         {/* Comparison Table */}
-        <div style={{
-          backgroundColor: '#FFFFFF',
-          borderRadius: '24px',
-          border: '1px solid #DFE3E9',
-          padding: '2.5rem',
-          boxShadow: '0 16px 40px rgba(16, 19, 24, 0.06)',
-          marginBottom: '5rem',
-          overflowX: 'auto'
-        }}>
+        <div 
+          className="p-4 sm:p-6 md:p-10"
+          style={{
+            backgroundColor: '#FFFFFF',
+            borderRadius: '24px',
+            border: '1px solid #DFE3E9',
+            boxShadow: '0 16px 40px rgba(16, 19, 24, 0.06)',
+            marginBottom: '5rem'
+          }}
+        >
           <h3 style={{ fontSize: '1.5rem', fontFamily: 'var(--font-heading)', marginBottom: '1.5rem' }}>
             Abo-Vergleichstabelle (Schweizer Markt)
           </h3>
 
-          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem', textAlign: 'left' }}>
+          <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+            <table style={{ width: '100%', minWidth: '600px', borderCollapse: 'collapse', fontSize: '0.9rem', textAlign: 'left' }}>
             <thead>
               <tr style={{ borderBottom: '2px solid #E2E6EC', color: '#101318' }}>
                 <th style={{ padding: '1rem' }}>Tarif</th>
@@ -253,6 +254,7 @@ export const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ onOpenEnqu
               ))}
             </tbody>
           </table>
+          </div>
         </div>
 
         {/* In-Store Consultation Banner */}

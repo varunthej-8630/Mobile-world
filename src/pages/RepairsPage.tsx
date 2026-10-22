@@ -104,14 +104,14 @@ export const RepairsPage: React.FC<RepairsPageProps> = ({ onNavigate }) => {
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '2rem',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
+          gap: '1.5rem',
           marginBottom: '5rem'
         }}>
           {repairCategories.map((cat, idx) => {
             const Icon = cat.icon;
             return (
-              <div key={idx} className="card" style={{ padding: '2.25rem', backgroundColor: '#FFFFFF' }}>
+              <div key={idx} className="card p-5 sm:p-7 md:p-8" style={{ backgroundColor: '#FFFFFF' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem' }}>
                   <div style={{
                     backgroundColor: 'rgba(23, 76, 255, 0.1)',
@@ -156,13 +156,15 @@ export const RepairsPage: React.FC<RepairsPageProps> = ({ onNavigate }) => {
         </div>
 
         {/* 4-Step Process Section */}
-        <div style={{
-          backgroundColor: '#FFFFFF',
-          borderRadius: '24px',
-          border: '1px solid #DFE3E9',
-          padding: '3.5rem',
-          boxShadow: '0 16px 40px rgba(16, 19, 24, 0.06)'
-        }}>
+        <div 
+          className="p-6 sm:p-8 md:p-12"
+          style={{
+            backgroundColor: '#FFFFFF',
+            borderRadius: '24px',
+            border: '1px solid #DFE3E9',
+            boxShadow: '0 16px 40px rgba(16, 19, 24, 0.06)'
+          }}
+        >
           <div className="section-header text-center">
             <span className="section-eyebrow">Einfach &amp; Transparent</span>
             <h2 className="section-title">In 4 Schritten zum reparierten Gerät</h2>
@@ -170,8 +172,8 @@ export const RepairsPage: React.FC<RepairsPageProps> = ({ onNavigate }) => {
 
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-            gap: '2.5rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))',
+            gap: '2rem',
             position: 'relative'
           }}>
             {[

@@ -650,6 +650,25 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 /* ==========================================================================
    RESPONSIVE BREAKPOINTS (sm: 640px, md: 768px, lg: 1024px)
    ========================================================================== */
+.col-span-12 { grid-column: span 12 / span 12 !important; }
+.col-span-6 { grid-column: span 6 / span 12 !important; }
+.col-span-1 { grid-column: span 1 / span 1 !important; }
+
+/* Responsive Card & Panel Padding */
+.card-responsive {
+  padding: 1.25rem !important;
+}
+@media (min-width: 640px) {
+  .card-responsive {
+    padding: 1.75rem !important;
+  }
+}
+@media (min-width: 1024px) {
+  .card-responsive {
+    padding: 2.5rem !important;
+  }
+}
+
 @media (max-width: 768px) {
   .hide-mobile {
     display: none !important;
@@ -661,9 +680,14 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
   .sm\:flex { display: flex !important; }
   .sm\:grid { display: grid !important; }
   .sm\:hidden { display: none !important; }
+  .sm\:flex-row { flex-direction: row !important; }
   .sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
   .sm\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
   .sm\:col-span-2 { grid-column: span 2 / span 2 !important; }
+  .sm\:col-span-6 { grid-column: span 6 / span 12 !important; }
+  .sm\:col-span-12 { grid-column: span 12 / span 12 !important; }
+  .sm\:p-6 { padding: 1.5rem !important; }
+  .sm\:p-8 { padding: 2rem !important; }
   .sm\:p-10 { padding: 2.5rem !important; }
 }
 
@@ -675,8 +699,14 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
   .md\:items-center { align-items: center !important; }
   .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
   .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+  .md\:col-span-4 { grid-column: span 4 / span 12 !important; }
+  .md\:col-span-6 { grid-column: span 6 / span 12 !important; }
+  .md\:col-span-8 { grid-column: span 8 / span 12 !important; }
+  .md\:col-span-12 { grid-column: span 12 / span 12 !important; }
   .md\:p-5 { padding: 1.25rem !important; }
+  .md\:p-6 { padding: 1.5rem !important; }
   .md\:p-8 { padding: 2rem !important; }
+  .md\:p-10 { padding: 2.5rem !important; }
   .md\:p-12 { padding: 3rem !important; }
   .md\:py-16 { padding-top: 4rem !important; padding-bottom: 4rem !important; }
   .md\:py-24 { padding-top: 6rem !important; padding-bottom: 6rem !important; }
@@ -688,10 +718,16 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
   .lg\:flex { display: flex !important; }
   .lg\:hidden { display: none !important; }
   .lg\:block { display: block !important; }
-  .lg\:col-span-7 { grid-column: span 7 / span 12 !important; }
-  .lg\:col-span-5 { grid-column: span 5 / span 12 !important; }
+  .lg\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
   .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
   .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+  .lg\:grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)) !important; }
+  .lg\:col-span-4 { grid-column: span 4 / span 12 !important; }
+  .lg\:col-span-5 { grid-column: span 5 / span 12 !important; }
+  .lg\:col-span-6 { grid-column: span 6 / span 12 !important; }
+  .lg\:col-span-7 { grid-column: span 7 / span 12 !important; }
+  .lg\:col-span-8 { grid-column: span 8 / span 12 !important; }
+  .lg\:col-span-12 { grid-column: span 12 / span 12 !important; }
 }
 
 /* ==========================================================================

@@ -53,8 +53,8 @@ export const InsurancePage: React.FC<InsurancePageProps> = ({ onNavigate }) => {
       <div className="container" style={{ marginTop: '4rem', maxWidth: '1000px' }}>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '3rem',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
+          gap: '2.5rem',
           alignItems: 'flex-start'
         }}>
           {/* Benefits Info */}
@@ -98,13 +98,15 @@ export const InsurancePage: React.FC<InsurancePageProps> = ({ onNavigate }) => {
           </div>
 
           {/* Enquiry Form */}
-          <div style={{
-            backgroundColor: '#FFFFFF',
-            borderRadius: '20px',
-            border: '1px solid #DFE3E9',
-            padding: '2.5rem',
-            boxShadow: '0 8px 24px rgba(16, 19, 24, 0.05)'
-          }}>
+          <div
+            className="p-5 sm:p-7 md:p-10"
+            style={{
+              backgroundColor: '#FFFFFF',
+              borderRadius: '20px',
+              border: '1px solid #DFE3E9',
+              boxShadow: '0 8px 24px rgba(16, 19, 24, 0.05)'
+            }}
+          >
             {submitted ? (
               <div style={{ textAlign: 'center', padding: '2rem 1rem' }}>
                 <CheckCircle size={48} color="#10B981" style={{ margin: '0 auto 1rem' }} />

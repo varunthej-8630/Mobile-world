@@ -229,26 +229,22 @@ export const HomePage: React.FC<HomePageProps> = ({
           </div>
 
           {/* Asymmetrical Layout: Large Featured Repair Showcase (Left) + 3 Curated Tiles (Right) */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(12, 1fr)',
-            gap: '1.75rem',
-            alignItems: 'stretch'
-          }}>
+          <div 
+            className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch"
+          >
             {/* DESTINATION 1: Phone Repairs (Dominant Featured Panel ~ 7 Columns on Desktop) */}
             <div
               style={{
                 backgroundColor: '#FFFFFF',
                 borderRadius: '20px',
                 border: '1px solid #E2E8F0',
-                padding: '2.5rem',
                 boxShadow: '0 4px 20px rgba(16, 19, 24, 0.04)',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 transition: 'all 240ms cubic-bezier(0.16, 1, 0.3, 1)'
               }}
-              className="lg:col-span-7"
+              className="col-span-12 lg:col-span-7 p-5 sm:p-8 md:p-10"
             >
               <div>
                 <div style={{
@@ -387,7 +383,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               display: 'flex',
               flexDirection: 'column',
               gap: '1.25rem'
-            }} className="lg:col-span-5">
+            }} className="col-span-12 lg:col-span-5">
               
               {/* DESTINATION 2: Mobile Subscriptions */}
               <div
@@ -738,8 +734,8 @@ export const HomePage: React.FC<HomePageProps> = ({
         <div className="container">
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '4.5rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 290px), 1fr))',
+            gap: '2.5rem',
             alignItems: 'center'
           }}>
             <div>
@@ -859,8 +855,8 @@ export const HomePage: React.FC<HomePageProps> = ({
         <div className="container">
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '4.5rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 290px), 1fr))',
+            gap: '2.5rem',
             alignItems: 'center'
           }}>
             {/* Real Consultation Photo */}
@@ -932,10 +928,10 @@ export const HomePage: React.FC<HomePageProps> = ({
             overflow: 'hidden',
             boxShadow: '0 16px 40px rgba(16, 19, 24, 0.05)',
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))'
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))'
           }}>
             {/* Storefront Image */}
-            <div style={{ position: 'relative', minHeight: '380px' }}>
+            <div style={{ position: 'relative', minHeight: '320px' }}>
               <img
                 src="/assets/modern-mobile-world-storefront-at-dusk.png"
                 alt="Mobile World ZH Seebach Ladengeschäft Schaffhauserstrasse 455"
@@ -962,7 +958,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             </div>
 
             {/* Store Information */}
-            <div style={{ padding: '3rem 2.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <div className="p-6 sm:p-8 md:p-10" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
               <div>
                 <span className="section-eyebrow">Filiale Seebach</span>
                 <h3 style={{ fontSize: '1.75rem', fontFamily: 'var(--font-heading)', marginBottom: '1rem' }}>

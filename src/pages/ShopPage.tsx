@@ -346,7 +346,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onNavigate, initialCategory 
         {filteredProducts.length > 0 ? (
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 260px), 1fr))',
             gap: '1.75rem'
           }}>
             {filteredProducts.map(product => (

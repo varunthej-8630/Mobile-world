@@ -81,10 +81,11 @@ export const RepairPriceFinder: React.FC<RepairPriceFinderProps> = ({ onOpenEnqu
       borderRadius: '20px',
       border: '1px solid #DFE3E9',
       boxShadow: '0 12px 36px rgba(16, 19, 24, 0.08)',
-      padding: compact ? '1.5rem' : '2.5rem',
       position: 'relative',
       overflow: 'hidden'
-    }}>
+    }}
+    className={compact ? 'p-4 sm:p-5' : 'p-4 sm:p-6 md:p-10'}
+    >
       {/* Step Indicators Header */}
       <div style={{
         display: 'flex',
@@ -131,11 +132,11 @@ export const RepairPriceFinder: React.FC<RepairPriceFinderProps> = ({ onOpenEnqu
         </div>
       </div>
 
-      {/* Grid: 2 Columns on desktop */}
+      {/* Grid: 2 Columns on desktop, 1 on mobile */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: compact ? '1fr' : 'repeat(auto-fit, minmax(320px, 1fr))',
-        gap: '2.5rem'
+        gridTemplateColumns: compact ? '1fr' : 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
+        gap: '2rem'
       }}>
         {/* Step Selectors Form */}
         <div>
@@ -304,18 +305,20 @@ export const RepairPriceFinder: React.FC<RepairPriceFinderProps> = ({ onOpenEnqu
         {/* Price Result Showcase Card */}
         <div>
           {activeRecord ? (
-            <div style={{
-              backgroundColor: '#101318',
-              color: '#FFFFFF',
-              borderRadius: '16px',
-              padding: '2rem',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              height: '100%',
-              boxShadow: '0 20px 40px rgba(16, 19, 24, 0.25)',
-              position: 'relative'
-            }}>
+            <div 
+              className="p-5 sm:p-6 md:p-8"
+              style={{
+                backgroundColor: '#101318',
+                color: '#FFFFFF',
+                borderRadius: '16px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                height: '100%',
+                boxShadow: '0 20px 40px rgba(16, 19, 24, 0.25)',
+                position: 'relative'
+              }}
+            >
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem' }}>
                   <span className="badge badge-blue" style={{ backgroundColor: 'rgba(23, 76, 255, 0.25)', color: '#7096FF' }}>
@@ -348,9 +351,9 @@ export const RepairPriceFinder: React.FC<RepairPriceFinderProps> = ({ onOpenEnqu
                   borderBottom: '1px solid #262E3B',
                   paddingBottom: '1.5rem'
                 }}>
-                  <span style={{ fontSize: '1.5rem', fontWeight: 600, color: '#AAB2C0' }}>CHF</span>
+                  <span style={{ fontSize: '1.25rem', fontWeight: 600, color: '#AAB2C0' }}>CHF</span>
                   <span style={{
-                    fontSize: '3.25rem',
+                    fontSize: 'clamp(2.25rem, 5vw, 3.25rem)',
                     fontWeight: 700,
                     fontFamily: 'var(--font-heading)',
                     lineHeight: 1,

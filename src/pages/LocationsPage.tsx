@@ -39,12 +39,12 @@ export const LocationsPage: React.FC<LocationsPageProps> = ({ onNavigate }) => {
                 border: b.isHeadquarters ? '2px solid #174CFF' : '1px solid #DFE3E9',
                 overflow: 'hidden',
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
                 boxShadow: '0 12px 36px rgba(16, 19, 24, 0.05)'
               }}
             >
               {/* Branch Image */}
-              <div style={{ minHeight: '300px', position: 'relative' }}>
+              <div style={{ minHeight: '260px', position: 'relative' }}>
                 <img
                   src={b.imageUrl}
                   alt={b.name}
@@ -64,7 +64,10 @@ export const LocationsPage: React.FC<LocationsPageProps> = ({ onNavigate }) => {
               </div>
 
               {/* Branch Info */}
-              <div style={{ padding: '2.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <div
+                className="p-5 sm:p-7 md:p-10"
+                style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
+              >
                 <div>
                   <h3 style={{ fontSize: '1.65rem', fontFamily: 'var(--font-heading)', marginBottom: '0.75rem', color: '#101318' }}>
                     {b.name}

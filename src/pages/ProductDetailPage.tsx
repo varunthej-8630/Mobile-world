@@ -74,29 +74,33 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ productId,
 
       <div className="container" style={{ marginTop: '2.5rem' }}>
         {/* Main Product Showcase Box */}
-        <div style={{
-          backgroundColor: '#FFFFFF',
-          borderRadius: '24px',
-          border: '1px solid #DFE3E9',
-          padding: '2.5rem',
-          boxShadow: '0 12px 36px rgba(16, 19, 24, 0.05)',
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
-          gap: '3.5rem',
-          marginBottom: '3rem'
-        }}>
+        <div 
+          className="p-5 sm:p-8 md:p-10"
+          style={{
+            backgroundColor: '#FFFFFF',
+            borderRadius: '24px',
+            border: '1px solid #DFE3E9',
+            boxShadow: '0 12px 36px rgba(16, 19, 24, 0.05)',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
+            gap: '2.5rem',
+            marginBottom: '3rem'
+          }}
+        >
           {/* Left: Product Image Gallery */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            <div style={{
-              backgroundColor: '#F8FAFC',
-              borderRadius: '20px',
-              padding: '2.5rem',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              border: '1px solid #E2E6EC',
-              position: 'relative'
-            }}>
+            <div 
+              className="p-4 sm:p-6 md:p-8"
+              style={{
+                backgroundColor: '#F8FAFC',
+                borderRadius: '20px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                border: '1px solid #E2E6EC',
+                position: 'relative'
+              }}
+            >
               {product.condition !== 'new' && (
                 <span className="badge badge-lime" style={{ position: 'absolute', top: '16px', left: '16px' }}>
                   <Sparkles size={12} /> Refurbished A+
@@ -273,21 +277,23 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ productId,
         </div>
 
         {/* Specifications Table */}
-        <div style={{
-          backgroundColor: '#FFFFFF',
-          borderRadius: '24px',
-          border: '1px solid #DFE3E9',
-          padding: '2.5rem',
-          boxShadow: '0 12px 36px rgba(16, 19, 24, 0.05)',
-          marginBottom: '4rem'
-        }}>
+        <div
+          className="p-5 sm:p-7 md:p-10"
+          style={{
+            backgroundColor: '#FFFFFF',
+            borderRadius: '24px',
+            border: '1px solid #DFE3E9',
+            boxShadow: '0 12px 36px rgba(16, 19, 24, 0.05)',
+            marginBottom: '4rem'
+          }}
+        >
           <h3 style={{ fontSize: '1.5rem', fontFamily: 'var(--font-heading)', marginBottom: '1.5rem' }}>
             Technische Daten &amp; Eigenschaften
           </h3>
 
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))',
             gap: '1rem'
           }}>
             {Object.entries(product.specs).map(([key, val]) => (
@@ -321,7 +327,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ productId,
 
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))',
               gap: '1.75rem'
             }}>
               {relatedProducts.map(rel => (

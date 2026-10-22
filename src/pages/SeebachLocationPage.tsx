@@ -47,11 +47,11 @@ export const SeebachLocationPage: React.FC<SeebachLocationPageProps> = ({ onNavi
         {/* Photos Grid */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
           gap: '1.5rem',
           marginBottom: '3rem'
         }}>
-          <div style={{ borderRadius: '16px', overflow: 'hidden', border: '1px solid #DFE3E9', height: '280px' }}>
+          <div style={{ borderRadius: '16px', overflow: 'hidden', border: '1px solid #DFE3E9', height: '240px' }}>
             <img
               src="/assets/modern-mobile-world-storefront-at-dusk.png"
               alt="Aussenansicht Mobile World Seebach Schaffhauserstrasse 455"
@@ -59,7 +59,7 @@ export const SeebachLocationPage: React.FC<SeebachLocationPageProps> = ({ onNavi
             />
           </div>
 
-          <div style={{ borderRadius: '16px', overflow: 'hidden', border: '1px solid #DFE3E9', height: '280px' }}>
+          <div style={{ borderRadius: '16px', overflow: 'hidden', border: '1px solid #DFE3E9', height: '240px' }}>
             <img
               src="/assets/modern-mobile-world-store-interior.png"
               alt="Innenansicht Store Mobile World Zürich"
@@ -67,7 +67,7 @@ export const SeebachLocationPage: React.FC<SeebachLocationPageProps> = ({ onNavi
             />
           </div>
 
-          <div style={{ borderRadius: '16px', overflow: 'hidden', border: '1px solid #DFE3E9', height: '280px' }}>
+          <div style={{ borderRadius: '16px', overflow: 'hidden', border: '1px solid #DFE3E9', height: '240px' }}>
             <img
               src="/assets/phone-consultation-at-mobile-shop.png"
               alt="Kundenberatung am Schalter"
@@ -77,17 +77,19 @@ export const SeebachLocationPage: React.FC<SeebachLocationPageProps> = ({ onNavi
         </div>
 
         {/* Location & Opening Hours Card */}
-        <div style={{
-          backgroundColor: '#FFFFFF',
-          borderRadius: '24px',
-          border: '1px solid #DFE3E9',
-          padding: '3rem',
-          boxShadow: '0 12px 36px rgba(16, 19, 24, 0.05)',
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '3rem',
-          marginBottom: '3rem'
-        }}>
+        <div
+          className="p-5 sm:p-7 md:p-10"
+          style={{
+            backgroundColor: '#FFFFFF',
+            borderRadius: '24px',
+            border: '1px solid #DFE3E9',
+            boxShadow: '0 12px 36px rgba(16, 19, 24, 0.05)',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
+            gap: '2.5rem',
+            marginBottom: '3rem'
+          }}
+        >
           <div>
             <h3 style={{ fontSize: '1.5rem', fontFamily: 'var(--font-heading)', marginBottom: '1.25rem' }}>
               Kontakt &amp; Öffnungszeiten

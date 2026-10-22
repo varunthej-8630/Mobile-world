@@ -14,7 +14,7 @@ export const TermsPage: React.FC<TermsPageProps> = ({ onNavigate }) => {
           <span className="text-graphite font-semibold">AGB</span>
         </div>
 
-        <div className="bg-white rounded-2xl border border-silver/30 p-8 md:p-12 shadow-sm space-y-8">
+        <div className="bg-white rounded-2xl border border-silver/30 p-5 sm:p-8 md:p-12 shadow-sm space-y-8">
           <div>
             <span className="badge badge-cobalt mb-3">Rechtliche Grundlagen</span>
             <h1 className="text-3xl md:text-4xl font-bold font-heading text-graphite mb-3">

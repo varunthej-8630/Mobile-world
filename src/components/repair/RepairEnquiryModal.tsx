@@ -66,9 +66,9 @@ export const RepairEnquiryModal: React.FC<RepairEnquiryModalProps> = ({ repair, 
   return (
     <div className="modal-backdrop" onClick={onClose}>
       <div 
-        className="modal-content" 
+        className="modal-content p-4 sm:p-6 md:p-8" 
         onClick={(e) => e.stopPropagation()}
-        style={{ padding: '2rem' }}
+        style={{ maxHeight: '90vh', overflowY: 'auto' }}
       >
         {/* Close Button */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
@@ -156,6 +156,8 @@ export const RepairEnquiryModal: React.FC<RepairEnquiryModalProps> = ({ repair, 
               padding: '1rem 1.25rem',
               marginBottom: '1.5rem',
               display: 'flex',
+              flexWrap: 'wrap',
+              gap: '0.75rem',
               justifyContent: 'space-between',
               alignItems: 'center'
             }}>
@@ -192,8 +194,8 @@ export const RepairEnquiryModal: React.FC<RepairEnquiryModalProps> = ({ repair, 
               />
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-              <div className="form-group">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+              <div className="form-group mb-0">
                 <label className="form-label">E-Mail Adresse *</label>
                 <input
                   type="email"
@@ -205,7 +207,7 @@ export const RepairEnquiryModal: React.FC<RepairEnquiryModalProps> = ({ repair, 
                 />
               </div>
 
-              <div className="form-group">
+              <div className="form-group mb-0">
                 <label className="form-label">Mobiltelefon *</label>
                 <input
                   type="tel"
@@ -218,7 +220,7 @@ export const RepairEnquiryModal: React.FC<RepairEnquiryModalProps> = ({ repair, 
               </div>
             </div>
 
-            <div className="form-group">
+            <div className="form-group" style={{ marginTop: '1rem' }}>
               <label className="form-label">Bevorzugte Filiale</label>
               <select
                 value={branch}
@@ -250,6 +252,7 @@ export const RepairEnquiryModal: React.FC<RepairEnquiryModalProps> = ({ repair, 
 
               <div style={{
                 display: 'flex',
+                flexWrap: 'wrap',
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '0.5rem',

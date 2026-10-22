@@ -152,18 +152,20 @@ export const CartPage: React.FC<CartPageProps> = ({ onNavigate }) => {
         ) : (
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '2.5rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
+            gap: '2rem',
             alignItems: 'flex-start'
           }}>
             {/* Items List */}
-            <div style={{
-              backgroundColor: '#FFFFFF',
-              borderRadius: '20px',
-              border: '1px solid #DFE3E9',
-              padding: '1.75rem',
-              boxShadow: '0 8px 24px rgba(16, 19, 24, 0.04)'
-            }}>
+            <div
+              className="p-4 sm:p-6 md:p-8"
+              style={{
+                backgroundColor: '#FFFFFF',
+                borderRadius: '20px',
+                border: '1px solid #DFE3E9',
+                boxShadow: '0 8px 24px rgba(16, 19, 24, 0.04)'
+              }}
+            >
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                 {cart.map((item) => (
                   <div
@@ -250,13 +252,15 @@ export const CartPage: React.FC<CartPageProps> = ({ onNavigate }) => {
             </div>
 
             {/* Checkout Form & Summary */}
-            <div style={{
-              backgroundColor: '#FFFFFF',
-              borderRadius: '20px',
-              border: '1px solid #DFE3E9',
-              padding: '2rem',
-              boxShadow: '0 8px 24px rgba(16, 19, 24, 0.04)'
-            }}>
+            <div
+              className="p-4 sm:p-6 md:p-8"
+              style={{
+                backgroundColor: '#FFFFFF',
+                borderRadius: '20px',
+                border: '1px solid #DFE3E9',
+                boxShadow: '0 8px 24px rgba(16, 19, 24, 0.04)'
+              }}
+            >
               <h3 style={{ fontSize: '1.25rem', fontFamily: 'var(--font-heading)', marginBottom: '1.25rem' }}>
                 Bestell- &amp; Abholübersicht
               </h3>

@@ -57,10 +57,10 @@ export const RepairPricesPage: React.FC<RepairPricesPageProps> = ({ onOpenEnquir
 
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
             gap: '1.75rem'
           }}>
-            <div className="card" style={{ padding: '2rem', backgroundColor: '#FFFFFF' }}>
+            <div className="card p-5 sm:p-7 md:p-8" style={{ backgroundColor: '#FFFFFF' }}>
               <div style={{
                 backgroundColor: 'rgba(23, 76, 255, 0.1)',
                 color: '#174CFF',
@@ -80,7 +80,7 @@ export const RepairPricesPage: React.FC<RepairPricesPageProps> = ({ onOpenEnquir
               </p>
             </div>
 
-            <div className="card" style={{ padding: '2rem', backgroundColor: '#FFFFFF' }}>
+            <div className="card p-5 sm:p-7 md:p-8" style={{ backgroundColor: '#FFFFFF' }}>
               <div style={{
                 backgroundColor: 'rgba(16, 185, 129, 0.1)',
                 color: '#10B981',
@@ -100,7 +100,7 @@ export const RepairPricesPage: React.FC<RepairPricesPageProps> = ({ onOpenEnquir
               </p>
             </div>
 
-            <div className="card" style={{ padding: '2rem', backgroundColor: '#FFFFFF' }}>
+            <div className="card p-5 sm:p-7 md:p-8" style={{ backgroundColor: '#FFFFFF' }}>
               <div style={{
                 backgroundColor: 'rgba(245, 158, 11, 0.1)',
                 color: '#F59E0B',
@@ -123,18 +123,20 @@ export const RepairPricesPage: React.FC<RepairPricesPageProps> = ({ onOpenEnquir
         </div>
 
         {/* Not Found / Contact Help Box */}
-        <div style={{
-          marginTop: '4rem',
-          backgroundColor: '#FFFFFF',
-          borderRadius: '20px',
-          padding: '2.5rem',
-          border: '1px solid #DFE3E9',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: '2rem'
-        }}>
+        <div
+          className="p-5 sm:p-7 md:p-10"
+          style={{
+            marginTop: '4rem',
+            backgroundColor: '#FFFFFF',
+            borderRadius: '20px',
+            border: '1px solid #DFE3E9',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: '2rem'
+          }}
+        >
           <div>
             <h3 style={{ fontSize: '1.35rem', marginBottom: '0.5rem' }}>
               Ihr Modell ist nicht im Rechner aufgeführt?

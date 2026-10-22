@@ -65,8 +65,8 @@ export const BusinessPage: React.FC<BusinessPageProps> = ({ onNavigate }) => {
       <div className="container" style={{ marginTop: '4rem', maxWidth: '1050px' }}>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '3rem',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
+          gap: '2.5rem',
           alignItems: 'flex-start'
         }}>
           {/* Left: Benefits & Information */}
@@ -133,13 +133,15 @@ export const BusinessPage: React.FC<BusinessPageProps> = ({ onNavigate }) => {
           </div>
 
           {/* Right: Business Enquiry Form */}
-          <div style={{
-            backgroundColor: '#FFFFFF',
-            borderRadius: '24px',
-            border: '1px solid #DFE3E9',
-            padding: '2.5rem',
-            boxShadow: '0 12px 36px rgba(16, 19, 24, 0.05)'
-          }}>
+          <div
+            className="p-5 sm:p-7 md:p-10"
+            style={{
+              backgroundColor: '#FFFFFF',
+              borderRadius: '24px',
+              border: '1px solid #DFE3E9',
+              boxShadow: '0 12px 36px rgba(16, 19, 24, 0.05)'
+            }}
+          >
             <h3 style={{ fontSize: '1.35rem', fontFamily: 'var(--font-heading)', marginBottom: '1.5rem', color: '#101318' }}>
               Firmen- &amp; Vereinsanfrage stellen
             </h3>
@@ -181,7 +183,7 @@ export const BusinessPage: React.FC<BusinessPageProps> = ({ onNavigate }) => {
                   />
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="form-group">
                     <label className="form-label">Geschäftliche E-Mail *</label>
                     <input
@@ -207,7 +209,7 @@ export const BusinessPage: React.FC<BusinessPageProps> = ({ onNavigate }) => {
                   </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="form-group">
                     <label className="form-label">Organisationstyp</label>
                     <select value={orgType} onChange={(e) => setOrgType(e.target.value)} className="form-control">

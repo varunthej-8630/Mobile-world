@@ -77,18 +77,20 @@ export const BuySellPage: React.FC<BuySellPageProps> = ({ onNavigate }) => {
       <div className="container" style={{ marginTop: '4rem', maxWidth: '1050px' }}>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '3rem',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
+          gap: '2.5rem',
           alignItems: 'flex-start'
         }}>
           {/* Trade-in Configurator */}
-          <div style={{
-            backgroundColor: '#FFFFFF',
-            borderRadius: '24px',
-            border: '1px solid #DFE3E9',
-            padding: '2.5rem',
-            boxShadow: '0 12px 36px rgba(16, 19, 24, 0.05)'
-          }}>
+          <div
+            className="p-5 sm:p-7 md:p-10"
+            style={{
+              backgroundColor: '#FFFFFF',
+              borderRadius: '24px',
+              border: '1px solid #DFE3E9',
+              boxShadow: '0 12px 36px rgba(16, 19, 24, 0.05)'
+            }}
+          >
             <h3 style={{ fontSize: '1.4rem', fontFamily: 'var(--font-heading)', marginBottom: '1.5rem', color: '#101318' }}>
               Gerät bewerten &amp; Richtwert berechnen
             </h3>
@@ -106,8 +108,8 @@ export const BuySellPage: React.FC<BuySellPageProps> = ({ onNavigate }) => {
               </div>
             ) : (
               <form onSubmit={handleSubmit}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
-                  <div className="form-group">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                  <div className="form-group mb-0">
                     <label className="form-label">Hersteller</label>
                     <select value={brand} onChange={(e) => setBrand(e.target.value)} className="form-control">
                       <option value="Apple">Apple iPhone</option>
@@ -117,7 +119,7 @@ export const BuySellPage: React.FC<BuySellPageProps> = ({ onNavigate }) => {
                     </select>
                   </div>
 
-                  <div className="form-group">
+                  <div className="form-group mb-0">
                     <label className="form-label">Modell</label>
                     <input
                       type="text"
@@ -132,7 +134,7 @@ export const BuySellPage: React.FC<BuySellPageProps> = ({ onNavigate }) => {
 
                 <div className="form-group">
                   <label className="form-label">Speicherkapazität</label>
-                  <div style={{ display: 'flex', gap: '0.5rem' }}>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                     {['64 GB', '128 GB', '256 GB', '512 GB / 1 TB'].map(st => (
                       <button
                         key={st}
@@ -226,8 +228,8 @@ export const BuySellPage: React.FC<BuySellPageProps> = ({ onNavigate }) => {
                   />
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                  <div className="form-group">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-2">
+                  <div className="form-group mb-0">
                     <label className="form-label">Telefonnummer *</label>
                     <input
                       type="tel"
@@ -239,7 +241,7 @@ export const BuySellPage: React.FC<BuySellPageProps> = ({ onNavigate }) => {
                     />
                   </div>
 
-                  <div className="form-group">
+                  <div className="form-group mb-0">
                     <label className="form-label">E-Mail *</label>
                     <input
                       type="email"

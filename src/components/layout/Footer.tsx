@@ -29,16 +29,18 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
     }}>
       <div className="container">
         {/* Top Feature Banner */}
-        <div style={{
-          backgroundColor: '#181D26',
-          borderRadius: '16px',
-          border: '1px solid #262E3B',
-          padding: '2rem 2.5rem',
-          marginBottom: '4rem',
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-          gap: '2rem'
-        }}>
+        <div
+          className="p-5 sm:p-7 md:p-8"
+          style={{
+            backgroundColor: '#181D26',
+            borderRadius: '16px',
+            border: '1px solid #262E3B',
+            marginBottom: '4rem',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))',
+            gap: '2rem'
+          }}
+        >
           <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
             <div style={{
               backgroundColor: 'rgba(23, 76, 255, 0.15)',
@@ -88,8 +90,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         {/* Main Footer Links Columns */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-          gap: '3rem',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))',
+          gap: '2.5rem',
           marginBottom: '4rem'
         }}>
           {/* Brand Info */}

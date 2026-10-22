@@ -79,18 +79,17 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate }) => {
       <div className="container" style={{ marginTop: '4rem' }}>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
-          gap: '2rem'
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 290px), 1fr))',
+          gap: '1.5rem'
         }}>
           {services.map((svc, i) => {
             const Icon = svc.icon;
             return (
               <div
                 key={i}
-                className="card"
+                className="card p-5 sm:p-7 md:p-8"
                 style={{
                   backgroundColor: '#FFFFFF',
-                  padding: '2.5rem',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between'

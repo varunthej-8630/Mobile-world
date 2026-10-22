@@ -572,18 +572,18 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate, onOpenS
                 )}
               </button>
 
-              {/* Customer Account Trigger */}
+              {/* Customer Account Trigger (Desktop & Tablet) */}
               <button
                 onClick={() => handleNavClick(isAuthenticated ? '/account/profile' : '/account')}
                 aria-label="Kundenkonto"
                 title={isAuthenticated ? `Konto: ${user?.fullName}` : 'Anmelden'}
+                className="hidden sm:flex"
                 style={{
                   background: 'none',
                   border: 'none',
                   color: 'rgba(255, 255, 255, 0.75)',
                   cursor: 'pointer',
                   padding: '0.45rem',
-                  display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   borderRadius: '50%',
@@ -601,9 +601,10 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate, onOpenS
                 <User size={18} />
               </button>
 
-              {/* ONE Distinctive Primary Action Button */}
+              {/* ONE Distinctive Primary Action Button (Desktop & Tablet) */}
               <button
                 onClick={() => handleNavClick('/repair-prices')}
+                className="hidden md:flex"
                 style={{
                   backgroundColor: '#174CFF',
                   color: '#FFFFFF',
@@ -612,7 +613,6 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate, onOpenS
                   padding: isScrolled ? '0.45rem 1.15rem' : '0.55rem 1.35rem',
                   fontSize: '0.85rem',
                   fontWeight: 600,
-                  display: 'flex',
                   alignItems: 'center',
                   gap: '0.45rem',
                   cursor: 'pointer',
@@ -737,6 +737,31 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate, onOpenS
                   <ChevronRight size={18} color="rgba(255, 255, 255, 0.4)" />
                 </button>
               ))}
+
+              {/* Mobile Account Access */}
+              <button
+                onClick={() => handleNavClick(isAuthenticated ? '/account/profile' : '/account')}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  color: currentPath.startsWith('/account') ? '#174CFF' : '#FFFFFF',
+                  fontSize: '1.25rem',
+                  fontWeight: 600,
+                  padding: '0.75rem 0',
+                  borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  cursor: 'pointer'
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <User size={20} color="#174CFF" />
+                  <span>{isAuthenticated ? `Konto (${user?.fullName || 'Angemeldet'})` : 'Kundenkonto / Anmelden'}</span>
+                </div>
+                <ChevronRight size={18} color="rgba(255, 255, 255, 0.4)" />
+              </button>
             </div>
 
             {/* Prominent Mobile Repair CTA */}

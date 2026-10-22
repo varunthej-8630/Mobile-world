@@ -66,9 +66,9 @@ export const SubscriptionEnquiryModal: React.FC<SubscriptionEnquiryModalProps> =
   return (
     <div className="modal-backdrop" onClick={onClose}>
       <div 
-        className="modal-content" 
+        className="modal-content p-4 sm:p-6 md:p-8" 
         onClick={(e) => e.stopPropagation()}
-        style={{ padding: '2rem' }}
+        style={{ maxHeight: '90vh', overflowY: 'auto' }}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -142,6 +142,8 @@ export const SubscriptionEnquiryModal: React.FC<SubscriptionEnquiryModalProps> =
               padding: '1rem 1.25rem',
               marginBottom: '1.5rem',
               display: 'flex',
+              flexWrap: 'wrap',
+              gap: '0.75rem',
               justifyContent: 'space-between',
               alignItems: 'center'
             }}>
@@ -181,8 +183,8 @@ export const SubscriptionEnquiryModal: React.FC<SubscriptionEnquiryModalProps> =
               />
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-              <div className="form-group">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+              <div className="form-group mb-0">
                 <label className="form-label">E-Mail Adresse *</label>
                 <input
                   type="email"
@@ -194,7 +196,7 @@ export const SubscriptionEnquiryModal: React.FC<SubscriptionEnquiryModalProps> =
                 />
               </div>
 
-              <div className="form-group">
+              <div className="form-group mb-0">
                 <label className="form-label">Mobiltelefon *</label>
                 <input
                   type="tel"
@@ -207,9 +209,9 @@ export const SubscriptionEnquiryModal: React.FC<SubscriptionEnquiryModalProps> =
               </div>
             </div>
 
-            <div className="form-group">
+            <div className="form-group" style={{ marginTop: '1rem' }}>
               <label className="form-label">Bestehende Rufnummer behalten?</label>
-              <div style={{ display: 'flex', gap: '1.5rem', marginTop: '0.35rem' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', marginTop: '0.35rem' }}>
                 <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.9rem', cursor: 'pointer' }}>
                   <input
                     type="radio"

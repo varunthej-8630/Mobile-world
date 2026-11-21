@@ -22,26 +22,34 @@ export const RepairPricesPage: React.FC<RepairPricesPageProps> = ({ onOpenEnquir
   );
 
   return (
-    <div style={{ backgroundColor: '#F5F6F8', paddingBottom: '6rem' }}>
-      {/* Page Header */}
-      <div style={{ backgroundColor: '#101318', color: '#FFFFFF', padding: '4.5rem 0' }}>
-        <div className="container" style={{ textAlign: 'center', maxWidth: '800px' }}>
-          <span className="section-eyebrow" style={{ color: '#7096FF' }}>Mobile World Werkstatt Zürich</span>
+    <div style={{ backgroundColor: '#F4F4F4', paddingBottom: '6rem' }}>
+      {/* Page Header (Raphus Style) */}
+      <div 
+        className="bg-gradient-shaph bg-white border-b border-[#E8E8E8]"
+        style={{
+          paddingTop: 'clamp(7.5rem, 12vh, 9.25rem)',
+          paddingBottom: '3.5rem'
+        }}
+      >
+        <div className="container" style={{ textAlign: 'center', maxWidth: '800px', position: 'relative', zIndex: 10 }}>
+          <span className="badge bg-secondary-subtle mb-3">Mobile World Werkstatt Zürich</span>
           <h1 style={{
             fontSize: 'clamp(2.25rem, 4vw, 3.25rem)',
-            color: '#FFFFFF',
+            color: '#1B1D1E',
             fontFamily: 'var(--font-heading)',
-            marginBottom: '1rem'
+            fontWeight: 800,
+            marginBottom: '1rem',
+            letterSpacing: '-0.02em'
           }}>
-            Reparaturpreise &amp; Rechner
+            Reparaturpreise &amp; <em className="font-instrument text-[#4928FD]">Kostenrechner</em>
           </h1>
-          <p style={{ color: '#94A3B8', fontSize: '1.15rem', lineHeight: 1.6 }}>
+          <p style={{ color: '#4B5563', fontSize: '1.15rem', lineHeight: 1.6 }}>
             Ermitteln Sie mit wenigen Klicks die exakten Reparaturkosten für Ihr Smartphone, Tablet oder Ihre Smartwatch. Alle Preise sind verbindlich inkl. 8.1% Schweizer MwSt., Ersatzteil und Arbeitsaufwand.
           </p>
         </div>
       </div>
 
-      <div className="container" style={{ marginTop: '-2rem' }}>
+      <div className="container" style={{ marginTop: '2.5rem' }}>
         {/* Main Price Finder Component */}
         <RepairPriceFinder onOpenEnquiry={onOpenEnquiry} />
 
@@ -58,66 +66,126 @@ export const RepairPricesPage: React.FC<RepairPricesPageProps> = ({ onOpenEnquir
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
-            gap: '1.75rem'
+            gap: '1.5rem'
           }}>
-            <div className="card p-5 sm:p-7 md:p-8" style={{ backgroundColor: '#FFFFFF' }}>
-              <div style={{
-                backgroundColor: 'rgba(23, 76, 255, 0.1)',
-                color: '#174CFF',
-                width: '44px',
-                height: '44px',
-                borderRadius: '10px',
+            <div 
+              style={{ 
+                backgroundColor: '#F7F0FE', 
+                borderRadius: '24px', 
+                border: '1px solid #E9D7FE',
+                padding: '1.5rem 1.35rem',
+                boxShadow: '0 4px 18px rgba(186, 129, 238, 0.1)',
                 display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '1.25rem'
-              }}>
-                <Sparkles size={22} />
+                flexDirection: 'column',
+                justifyContent: 'space-between'
+              }}
+              className="hover:-translate-y-1 hover:shadow-lg transition-all"
+            >
+              <div>
+                <div style={{
+                  backgroundColor: '#FFFFFF',
+                  color: '#7E22CE',
+                  width: '42px',
+                  height: '42px',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: '1rem',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.06)'
+                }}>
+                  <Sparkles size={20} />
+                </div>
+                <div style={{ fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: '#7E22CE', marginBottom: '0.35rem' }}>
+                  Güteklasse 1 · Original
+                </div>
+                <h3 style={{ fontSize: '1.18rem', fontWeight: 700, marginBottom: '0.45rem', fontFamily: 'var(--font-heading)', color: '#1B1D1E' }}>
+                  OEM Original
+                </h3>
+                <p style={{ fontSize: '0.85rem', color: '#4B5563', lineHeight: 1.55 }}>
+                  Höchste Güteklasse. 1:1 identisch mit dem ab Werk verbauten Originalteil des Herstellers (Apple, Samsung, Google). Maximale Helligkeit, 120Hz Bildwiederholrate und perfekte TrueTone-Farbabstimmung.
+                </p>
               </div>
-              <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>OEM Original</h3>
-              <p style={{ fontSize: '0.9rem', color: '#64748B', lineHeight: 1.6 }}>
-                Höchste Güteklasse. 1:1 identisch mit dem ab Werk verbauten Originalteil des Herstellers (Apple, Samsung, Google). Maximale Helligkeit, 120Hz Bildwiederholrate und perfekte TrueTone-Farbabstimmung.
-              </p>
             </div>
 
-            <div className="card p-5 sm:p-7 md:p-8" style={{ backgroundColor: '#FFFFFF' }}>
-              <div style={{
-                backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                color: '#10B981',
-                width: '44px',
-                height: '44px',
-                borderRadius: '10px',
+            <div 
+              style={{ 
+                backgroundColor: '#EFF6FF', 
+                borderRadius: '24px', 
+                border: '1px solid #BFDBFE',
+                padding: '1.5rem 1.35rem',
+                boxShadow: '0 4px 18px rgba(73, 40, 253, 0.08)',
                 display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '1.25rem'
-              }}>
-                <ShieldCheck size={22} />
+                flexDirection: 'column',
+                justifyContent: 'space-between'
+              }}
+              className="hover:-translate-y-1 hover:shadow-lg transition-all"
+            >
+              <div>
+                <div style={{
+                  backgroundColor: '#FFFFFF',
+                  color: '#1D4ED8',
+                  width: '42px',
+                  height: '42px',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: '1rem',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.06)'
+                }}>
+                  <ShieldCheck size={20} />
+                </div>
+                <div style={{ fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: '#1D4ED8', marginBottom: '0.35rem' }}>
+                  Preis-Leistungssieger
+                </div>
+                <h3 style={{ fontSize: '1.18rem', fontWeight: 700, marginBottom: '0.45rem', fontFamily: 'var(--font-heading)', color: '#1B1D1E' }}>
+                  Premium Soft OLED
+                </h3>
+                <p style={{ fontSize: '0.85rem', color: '#4B5563', lineHeight: 1.55 }}>
+                  Das beste Preis-Leistungs-Verhältnis. Flexibles OLED-Substrat mit satten Schwarzwerten und erstklassiger Stossresistenz. Kaum von einem Original zu unterscheiden, aber spürbar günstiger.
+                </p>
               </div>
-              <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>Premium Soft OLED</h3>
-              <p style={{ fontSize: '0.9rem', color: '#64748B', lineHeight: 1.6 }}>
-                Das beste Preis-Leistungs-Verhältnis. Flexibles OLED-Substrat mit satten Schwarzwerten und erstklassiger Stossresistenz. Kaum von einem Original zu unterscheiden, aber spürbar günstiger.
-              </p>
             </div>
 
-            <div className="card p-5 sm:p-7 md:p-8" style={{ backgroundColor: '#FFFFFF' }}>
-              <div style={{
-                backgroundColor: 'rgba(245, 158, 11, 0.1)',
-                color: '#F59E0B',
-                width: '44px',
-                height: '44px',
-                borderRadius: '10px',
+            <div 
+              style={{ 
+                backgroundColor: '#FFF7ED', 
+                borderRadius: '24px', 
+                border: '1px solid #FED7AA',
+                padding: '1.5rem 1.35rem',
+                boxShadow: '0 4px 18px rgba(255, 175, 104, 0.1)',
                 display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '1.25rem'
-              }}>
-                <Clock size={22} />
+                flexDirection: 'column',
+                justifyContent: 'space-between'
+              }}
+              className="hover:-translate-y-1 hover:shadow-lg transition-all"
+            >
+              <div>
+                <div style={{
+                  backgroundColor: '#FFFFFF',
+                  color: '#C2410C',
+                  width: '42px',
+                  height: '42px',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: '1rem',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.06)'
+                }}>
+                  <Clock size={20} />
+                </div>
+                <div style={{ fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: '#C2410C', marginBottom: '0.35rem' }}>
+                  Budget-Option
+                </div>
+                <h3 style={{ fontSize: '1.18rem', fontWeight: 700, marginBottom: '0.45rem', fontFamily: 'var(--font-heading)', color: '#1B1D1E' }}>
+                  Incell Standard
+                </h3>
+                <p style={{ fontSize: '0.85rem', color: '#4B5563', lineHeight: 1.55 }}>
+                  Die budgetfreundliche Alternative auf LCD-Basis. Perfekt für ältere Geräte oder Zweithandys, bei denen eine kostengünstige Wiederinbetriebnahme im Vordergrund steht.
+                </p>
               </div>
-              <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>Incell Standard</h3>
-              <p style={{ fontSize: '0.9rem', color: '#64748B', lineHeight: 1.6 }}>
-                Die budgetfreundliche Alternative auf LCD-Basis. Perfekt für ältere Geräte oder Zweithandys, bei denen eine kostengünstige Wiederinbetriebnahme im Vordergrund steht.
-              </p>
             </div>
           </div>
         </div>
@@ -128,8 +196,8 @@ export const RepairPricesPage: React.FC<RepairPricesPageProps> = ({ onOpenEnquir
           style={{
             marginTop: '4rem',
             backgroundColor: '#FFFFFF',
-            borderRadius: '20px',
-            border: '1px solid #DFE3E9',
+            borderRadius: '24px',
+            border: '1px solid #E8E8E8',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
@@ -138,7 +206,7 @@ export const RepairPricesPage: React.FC<RepairPricesPageProps> = ({ onOpenEnquir
           }}
         >
           <div>
-            <h3 style={{ fontSize: '1.35rem', marginBottom: '0.5rem' }}>
+            <h3 style={{ fontSize: '1.35rem', marginBottom: '0.5rem', fontFamily: 'var(--font-heading)' }}>
               Ihr Modell ist nicht im Rechner aufgeführt?
             </h3>
             <p style={{ color: '#64748B', maxWidth: '650px', fontSize: '0.95rem' }}>
@@ -146,19 +214,29 @@ export const RepairPricesPage: React.FC<RepairPricesPageProps> = ({ onOpenEnquir
             </p>
           </div>
 
-          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
             <a
               href="https://wa.me/41783448888"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-primary"
+              className="btn btn-whatsapp"
+              style={{ borderRadius: '9999px', padding: '0.55rem 1.25rem' }}
             >
-              <MessageSquare size={16} /> WhatsApp Direktanfrage
+              <MessageSquare size={16} /> <span>WhatsApp Direktanfrage</span>
+            </a>
+
+            <a
+              href="tel:+41445436333"
+              className="btn btn-secondary"
+              style={{ borderRadius: '9999px', padding: '0.55rem 1.25rem', border: '1px solid #E8E8E8' }}
+            >
+              <Phone size={16} /> +41 44 543 63 33
             </a>
 
             <button
               onClick={() => onNavigate('/contact')}
               className="btn btn-secondary"
+              style={{ borderRadius: '9999px', padding: '0.55rem 1.25rem', border: '1px solid #E8E8E8' }}
             >
               Kontaktformular
             </button>

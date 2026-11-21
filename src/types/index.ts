@@ -32,6 +32,9 @@ export interface SubscriptionPlan {
   activationFeeChf: number;
   highlightBadge?: string;
   features: string[];
+  active?: boolean;
+  published?: boolean;
+  displayOrder?: number;
   lastVerified: string;
 }
 
@@ -55,9 +58,14 @@ export interface Product {
   color?: string;
   storage?: string;
   shortDescription: string;
+  description?: string;
   specs: Record<string, string>;
+  features?: string[];
   featured?: boolean;
+  active?: boolean;
+  inStock?: boolean;
   warrantyPeriod: string;
+  warrantyMonths?: number;
   lastStockUpdate: string;
 }
 
@@ -98,7 +106,9 @@ export interface CustomerEnquiry {
   details: Record<string, any>;
   message: string;
   createdAt: string;
-  status: 'new' | 'in_progress' | 'completed';
+  status: 'new' | 'in_progress' | 'completed' | 'cancelled';
+  adminNotes?: string;
+  contractId?: string;
 }
 
 export interface UserAccount {
@@ -106,8 +116,74 @@ export interface UserAccount {
   fullName: string;
   email: string;
   phone: string;
+  role?: 'customer' | 'admin' | 'staff';
   address?: string;
   city?: string;
   postalCode?: string;
   registeredAt: string;
+}
+
+export interface Order {
+  id: string;
+  orderNumber: string;
+  customerName: string;
+  customerEmail: string;
+  customerPhone: string;
+  deliveryMethod: 'pickup' | 'post';
+  shippingCostChf: number;
+  subtotalChf: number;
+  vatChf: number;
+  grandTotalChf: number;
+  items: CartItem[];
+  status: 'received' | 'processing' | 'ready_for_pickup' | 'shipped' | 'completed' | 'cancelled';
+  paymentStatus?: 'pending' | 'paid' | 'refunded';
+  notes?: string;
+  createdAt: string;
+}
+
+export interface Contract {
+  id: string;
+  contractNumber: string;
+  customerId?: string;
+  customerName: string;
+  customerEmail: string;
+  customerPhone: string;
+  customerAddress?: string;
+  customerCity?: string;
+  customerPostalCode?: string;
+  planId: string;
+  planName: string;
+  provider: string;
+  monthlyPriceChf: number;
+  activationFeeChf: number;
+  durationMonths: string;
+  dataAllowance: string;
+  roamingAllowance: string;
+  status: 'draft' | 'pending_signature' | 'active' | 'archived';
+  createdAt: string;
+  notes?: string;
+}
+
+export interface InventoryAdjustmentLog {
+  id: string;
+  productId: string;
+  productName: string;
+  sku: string;
+  previousQuantity: number;
+  adjustment: number;
+  newQuantity: number;
+  reason: string;
+  performedBy: string;
+  timestamp: string;
+}
+
+export interface PriceAuditLogEntry {
+  id: string;
+  repairId: string;
+  model: string;
+  task: string;
+  oldPriceChf: number;
+  newPriceChf: number;
+  changedBy: string;
+  timestamp: string;
 }

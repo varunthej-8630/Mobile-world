@@ -20,11 +20,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
   return (
     <footer style={{
-      backgroundColor: '#101318',
+      backgroundColor: '#1B1D1E',
       color: '#AAB2C0',
       paddingTop: '4.5rem',
       paddingBottom: '2.5rem',
-      borderTop: '1px solid #1E2530',
+      borderTop: '1px solid #2D3133',
       marginTop: 'auto'
     }}>
       <div className="container">
@@ -32,9 +32,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         <div
           className="p-5 sm:p-7 md:p-8"
           style={{
-            backgroundColor: '#181D26',
-            borderRadius: '16px',
-            border: '1px solid #262E3B',
+            backgroundColor: '#25282A',
+            borderRadius: '22px',
+            border: '1px solid #333638',
             marginBottom: '4rem',
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))',
@@ -96,14 +96,21 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         }}>
           {/* Brand Info */}
           <div>
-            <img 
-              src="/assets/logo-white.png" 
-              alt="Mobile World Zürich" 
-              style={{ height: '44px', width: 'auto', marginBottom: '1.25rem' }}
-              onError={(e) => {
-                (e.target as HTMLImageElement).src = '/assets/mw-logo.png';
-              }}
-            />
+            <a 
+              href="#/" 
+              onClick={(e) => { e.preventDefault(); onNavigate('/'); }} 
+              aria-label="Mobile World Zürich — Zur Startseite"
+              style={{ display: 'inline-block', marginBottom: '1.25rem' }}
+            >
+              <img 
+                src="/assets/logo-white.png" 
+                alt="Mobile World Zürich" 
+                style={{ height: '44px', width: 'auto' }}
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = '/assets/mw-logo.png';
+                }}
+              />
+            </a>
             <p style={{ fontSize: '0.9rem', lineHeight: 1.6, color: '#94A3B8', marginBottom: '1.5rem' }}>
               Ihr Schweizer Fachgeschäft für Express-Handyreparaturen, vertragsfreie Neugeräte, geprüfte Refurbished-Modelle und unabhängige Mobilfunk-Abos in Zürich.
             </p>
@@ -112,9 +119,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 href="https://wa.me/41783448888" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="btn btn-outline-white btn-sm"
+                className="btn btn-whatsapp btn-sm"
               >
-                <MessageSquare size={14} /> WhatsApp Chat
+                <MessageSquare size={14} /> <span>WhatsApp Chat</span>
               </a>
             </div>
           </div>
@@ -125,6 +132,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               Navigation
             </h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.65rem', fontSize: '0.9rem' }}>
+              <li>
+                <a href="#/" onClick={(e) => { e.preventDefault(); onNavigate('/'); }} style={{ color: '#AAB2C0', transition: 'color 0.15s' }}>
+                  Startseite
+                </a>
+              </li>
               <li>
                 <a href="#/repairs" onClick={(e) => { e.preventDefault(); onNavigate('/repairs'); }} style={{ color: '#AAB2C0', transition: 'color 0.15s' }}>
                   Reparatur-Services
@@ -155,34 +167,54 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   Firmen- &amp; Vereinsangebote
                 </a>
               </li>
+              <li>
+                <a href="#/contact" onClick={(e) => { e.preventDefault(); onNavigate('/contact'); }} style={{ color: '#AAB2C0', transition: 'color 0.15s' }}>
+                  Kontakt &amp; Kundenservice
+                </a>
+              </li>
             </ul>
           </div>
 
           {/* Filialen / Standorte */}
           <div>
             <h4 style={{ color: '#FFFFFF', fontSize: '1rem', marginBottom: '1.25rem', fontFamily: 'var(--font-heading)' }}>
-              Filialen in Zürich
+              Filialen in Zürich (4 Standorte)
             </h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.85rem', fontSize: '0.875rem' }}>
               <li>
-                <strong style={{ color: '#FFFFFF', display: 'block' }}>Zürich Seebach (Hauptsitz)</strong>
-                <span>Schaffhauserstrasse 455, 8052 Zürich</span>
+                <strong style={{ color: '#FFFFFF', display: 'block' }}>Zürich Seebach (Hauptwerkstatt)</strong>
+                <span style={{ color: '#94A3B8' }}>Schaffhauserstrasse 455, 8052 Zürich</span>
                 <br />
-                <a href="#/locations/seebach" onClick={(e) => { e.preventDefault(); onNavigate('/locations/seebach'); }} style={{ color: '#174CFF', fontWeight: 600 }}>
-                  Filiale ansehen &rarr;
+                <a href="tel:+41445436333" style={{ color: '#7096FF', fontWeight: 600, marginRight: '0.75rem' }}>
+                  044 543 63 33
+                </a>
+                <a href="#/locations/seebach" onClick={(e) => { e.preventDefault(); onNavigate('/locations/seebach'); }} style={{ color: '#D9FF70', fontSize: '0.8rem' }}>
+                  Filialdetails &rarr;
                 </a>
               </li>
               <li>
                 <strong style={{ color: '#FFFFFF', display: 'block' }}>Bellevue-Stadelhofen</strong>
-                <span>Gottfried-Keller-Strasse 5, 8001 Zürich</span>
+                <span style={{ color: '#94A3B8' }}>Gottfried-Keller-Strasse 5, 8001 Zürich</span>
+                <br />
+                <a href="tel:+41445992444" style={{ color: '#7096FF', fontWeight: 600 }}>
+                  044 599 24 44
+                </a>
               </li>
               <li>
                 <strong style={{ color: '#FFFFFF', display: 'block' }}>Rüti ZH</strong>
-                <span>Dorfstrasse 4, 8630 Rüti</span>
+                <span style={{ color: '#94A3B8' }}>Dorfstrasse 4, 8630 Rüti</span>
+                <br />
+                <a href="tel:+41445916060" style={{ color: '#7096FF', fontWeight: 600 }}>
+                  044 591 60 60
+                </a>
               </li>
               <li>
                 <strong style={{ color: '#FFFFFF', display: 'block' }}>Oberengstringen</strong>
-                <span>Im Zentrum 1, 8102 Oberengstringen</span>
+                <span style={{ color: '#94A3B8' }}>Im Zentrum 1, 8102 Oberengstringen</span>
+                <br />
+                <a href="tel:+41435114400" style={{ color: '#7096FF', fontWeight: 600 }}>
+                  043 511 44 00
+                </a>
               </li>
             </ul>
           </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Radio, 
   CheckCircle, 
@@ -11,7 +11,7 @@ import {
   MessageSquare,
   Sparkles
 } from 'lucide-react';
-import { SUBSCRIPTION_PLANS } from '../data/subscriptions';
+import { mockDb } from '../data/mockDb';
 import { SubscriptionPlan } from '../types';
 
 interface SubscriptionsPageProps {
@@ -21,32 +21,46 @@ interface SubscriptionsPageProps {
 
 export const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ onOpenEnquiry, onNavigate }) => {
   const [filterProvider, setFilterProvider] = useState<string>('all');
+  const [plans, setPlans] = useState<SubscriptionPlan[]>(() => mockDb.getSubscriptions(true));
+
+  // Sync if mockDb updates
+  useEffect(() => {
+    setPlans(mockDb.getSubscriptions(true));
+  }, []);
 
   const filteredPlans = filterProvider === 'all' 
-    ? SUBSCRIPTION_PLANS 
-    : SUBSCRIPTION_PLANS.filter(p => p.provider === filterProvider);
+    ? plans 
+    : plans.filter(p => p.provider === filterProvider);
 
   return (
-    <div style={{ backgroundColor: '#F5F6F8', paddingBottom: '6rem' }}>
-      {/* Hero */}
-      <div style={{ backgroundColor: '#101318', color: '#FFFFFF', padding: '5rem 0' }}>
-        <div className="container" style={{ maxWidth: '850px', textAlign: 'center' }}>
-          <span className="section-eyebrow" style={{ color: '#7096FF' }}>Unabhängige Schweizer Abo-Beratung</span>
+    <div style={{ backgroundColor: '#F4F4F4', paddingBottom: '6rem' }}>
+      {/* Hero (Raphus Style) */}
+      <div 
+        className="bg-gradient-shaph bg-white border-b border-[#E8E8E8]"
+        style={{
+          paddingTop: 'clamp(7.5rem, 12vh, 9.25rem)',
+          paddingBottom: '3.5rem'
+        }}
+      >
+        <div className="container" style={{ maxWidth: '850px', textAlign: 'center', position: 'relative', zIndex: 10 }}>
+          <span className="badge bg-secondary-subtle mb-3">Unabhängige Schweizer Abo-Beratung</span>
           <h1 style={{
-            fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
-            color: '#FFFFFF',
+            fontSize: 'clamp(2.2rem, 4.5vw, 3.2rem)',
+            color: '#1B1D1E',
             fontFamily: 'var(--font-heading)',
-            marginBottom: '1.25rem',
-            lineHeight: 1.15
+            fontWeight: 800,
+            marginBottom: '1rem',
+            lineHeight: 1.15,
+            letterSpacing: '-0.02em'
           }}>
-            Handyabos &amp; Tarife im direkten Vergleich
+            Handyabos &amp; Tarife im <em className="font-instrument text-[#4928FD]">direkten Vergleich</em>
           </h1>
-          <p style={{ color: '#94A3B8', fontSize: '1.2rem', lineHeight: 1.6, marginBottom: '2.5rem' }}>
+          <p style={{ color: '#4B5563', fontSize: '1.1rem', lineHeight: 1.6, marginBottom: '2rem' }}>
             Finden Sie das perfekte Mobilfunkabo für Ihr Nutzungsverhalten. Wir sind offizieller Partner von Sunrise, Salt, yallo und LEBARA und sichern Ihnen die besten Aktionskonditionen mit kostenloser Rufnummernmitnahme.
           </p>
 
-          {/* Provider Filter Chips */}
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '0.65rem', flexWrap: 'wrap' }}>
+          {/* Provider Filter Chips (Raphus Pill Track) */}
+          <div className="nav-pill-track p-1.5 justify-center flex-wrap">
             {[
               { id: 'all', label: 'Alle Anbieter' },
               { id: 'Sunrise', label: 'Sunrise' },
@@ -58,18 +72,7 @@ export const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ onOpenEnqu
               <button
                 key={tab.id}
                 onClick={() => setFilterProvider(tab.id)}
-                style={{
-                  padding: '0.55rem 1.15rem',
-                  borderRadius: '24px',
-                  backgroundColor: filterProvider === tab.id ? '#174CFF' : 'rgba(255, 255, 255, 0.08)',
-                  border: '1px solid',
-                  borderColor: filterProvider === tab.id ? '#174CFF' : 'rgba(255, 255, 255, 0.15)',
-                  color: '#FFFFFF',
-                  fontWeight: 600,
-                  fontSize: '0.875rem',
-                  cursor: 'pointer',
-                  transition: 'all 0.15s ease'
-                }}
+                className={`nav-pill-item ${filterProvider === tab.id ? 'active' : ''}`}
               >
                 {tab.label}
               </button>
@@ -78,49 +81,53 @@ export const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ onOpenEnqu
         </div>
       </div>
 
-      <div className="container" style={{ marginTop: '4rem' }}>
-        {/* Plan Cards Grid */}
+      <div className="container" style={{ marginTop: '3.5rem', maxWidth: '1280px' }}>
+        {/* Plan Cards Grid — Balanced 3-column desktop layout */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
-          gap: '1.5rem',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+          gap: '1.75rem',
           marginBottom: '5rem'
         }}>
           {filteredPlans.map(plan => (
             <div
               key={plan.id}
-              className="card p-5 sm:p-7 md:p-8"
+              className="card p-6 sm:p-7"
               style={{
                 backgroundColor: '#FFFFFF',
+                borderRadius: '24px',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                border: plan.highlightBadge ? '2px solid #174CFF' : '1px solid #DFE3E9',
-                position: 'relative'
+                border: plan.highlightBadge ? '2px solid #BA81EE' : '1px solid #E8E8E8',
+                boxShadow: plan.highlightBadge ? '0 12px 32px rgba(73, 40, 253, 0.12)' : '0 4px 18px rgba(0, 0, 0, 0.03)',
+                transition: 'all 240ms cubic-bezier(0.16, 1, 0.3, 1)'
               }}
             >
-              {plan.highlightBadge && (
-                <div style={{
-                  position: 'absolute',
-                  top: '-12px',
-                  left: '50%',
-                  transform: 'translateX(-50%)',
-                  backgroundColor: '#174CFF',
-                  color: '#FFFFFF',
-                  fontSize: '0.75rem',
-                  fontWeight: 700,
-                  padding: '0.25rem 0.85rem',
-                  borderRadius: '12px',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.04em'
-                }}>
-                  {plan.highlightBadge}
-                </div>
-              )}
-
               <div>
+                {plan.highlightBadge && (
+                  <div style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.35rem',
+                    backgroundColor: '#F1E6FC',
+                    color: '#4928FD',
+                    border: '1px solid #E9D7FE',
+                    fontSize: '0.72rem',
+                    fontWeight: 700,
+                    padding: '0.3rem 0.75rem',
+                    borderRadius: '9999px',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.04em',
+                    marginBottom: '0.85rem'
+                  }}>
+                    <Sparkles size={12} />
+                    <span>{plan.highlightBadge}</span>
+                  </div>
+                )}
+
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-                  <span className="badge badge-blue">
+                  <span className="badge bg-secondary-subtle" style={{ fontSize: '0.75rem' }}>
                     {plan.provider}
                   </span>
                   <span style={{ fontSize: '0.8rem', color: '#64748B' }}>
@@ -128,7 +135,7 @@ export const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ onOpenEnqu
                   </span>
                 </div>
 
-                <h3 style={{ fontSize: '1.35rem', fontFamily: 'var(--font-heading)', marginBottom: '0.75rem' }}>
+                <h3 style={{ fontSize: '1.35rem', fontFamily: 'var(--font-heading)', marginBottom: '0.75rem', color: '#1B1D1E' }}>
                   {plan.name}
                 </h3>
 
@@ -141,12 +148,12 @@ export const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ onOpenEnqu
                   borderBottom: '1px solid #F1F5F9',
                   paddingBottom: '1.25rem'
                 }}>
-                  <span style={{ fontSize: '2.5rem', fontWeight: 700, fontFamily: 'var(--font-heading)', color: '#174CFF' }}>
+                  <span style={{ fontSize: '2.5rem', fontWeight: 800, fontFamily: 'var(--font-heading)', color: '#4928FD', whiteSpace: 'nowrap' }}>
                     CHF {(plan.discountPriceChf || plan.monthlyPriceChf).toFixed(2)}
                   </span>
-                  <span style={{ color: '#64748B', fontSize: '0.9rem' }}>/ Monat</span>
+                  <span style={{ color: '#64748B', fontSize: '0.9rem', whiteSpace: 'nowrap' }}>/ Monat</span>
                   {plan.discountPriceChf && (
-                    <span style={{ fontSize: '0.9rem', color: '#94A3B8', textDecoration: 'line-through', marginLeft: 'auto' }}>
+                    <span style={{ fontSize: '0.9rem', color: '#94A3B8', textDecoration: 'line-through', marginLeft: 'auto', whiteSpace: 'nowrap' }}>
                       CHF {plan.monthlyPriceChf.toFixed(2)}
                     </span>
                   )}
@@ -155,7 +162,7 @@ export const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ onOpenEnqu
                 {/* Details List */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginBottom: '2rem', fontSize: '0.925rem' }}>
                   <div style={{ display: 'flex', gap: '0.65rem' }}>
-                    <Zap size={18} color="#174CFF" style={{ flexShrink: 0, marginTop: '2px' }} />
+                    <Zap size={18} color="#4928FD" style={{ flexShrink: 0, marginTop: '2px' }} />
                     <span><strong>Daten:</strong> {plan.dataAllowance}</span>
                   </div>
                   <div style={{ display: 'flex', gap: '0.65rem' }}>
@@ -171,9 +178,10 @@ export const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ onOpenEnqu
                 {/* Features checklist */}
                 <div style={{
                   backgroundColor: '#F8FAFC',
-                  borderRadius: '10px',
-                  padding: '1rem',
-                  marginBottom: '2rem'
+                  borderRadius: '14px',
+                  padding: '1.1rem',
+                  marginBottom: '2rem',
+                  border: '1px solid #F1F5F9'
                 }}>
                   <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#64748B', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
                     Vorteile &amp; Konditionen:
@@ -192,10 +200,11 @@ export const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ onOpenEnqu
 
               <button
                 onClick={() => onOpenEnquiry(plan)}
-                className="btn btn-primary"
-                style={{ width: '100%', padding: '0.9rem' }}
+                className="btn-raphus-slide btn-raphus-slide-primary w-full"
+                style={{ minHeight: '48px', fontSize: '0.925rem' }}
               >
-                Abo unverbindlich anfragen
+                <span className="btn-slide-badge"><ArrowRight size={14} className="btn-slide-icon" /></span>
+                <span className="btn-slide-text">Abo unverbindlich anfragen</span>
               </button>
             </div>
           ))}
@@ -230,7 +239,7 @@ export const SubscriptionsPage: React.FC<SubscriptionsPageProps> = ({ onOpenEnqu
               </tr>
             </thead>
             <tbody>
-              {SUBSCRIPTION_PLANS.map((plan) => (
+              {plans.map((plan) => (
                 <tr key={plan.id} style={{ borderBottom: '1px solid #F1F5F9' }}>
                   <td style={{ padding: '1rem', fontWeight: 600 }}>{plan.name}</td>
                   <td style={{ padding: '1rem' }}>

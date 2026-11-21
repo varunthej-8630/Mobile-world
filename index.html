@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html lang="de-CH">
+<html lang="de">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no" />
     <title>Mobile World Zürich Seebach — Express Reparaturen, Handyabos & Shop</title>
     <meta name="description" content="Mobile World Zürich Seebach: Express Reparaturen in 30-60 Min mit 6 Monaten Garantie, faire Handyabos von Sunrise, Salt, yallo & LEBARA, geprüfte Neugeräte und Zubehör. Schaffhauserstrasse 455, 8052 Zürich." />
-    <link rel="icon" type="image/png" href="/assets/mw-favicon.png" />
+    <meta name="theme-color" content="#101318" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/mw-favicon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/mobile-world-compact-logo.png" />
     <link rel="apple-touch-icon" href="/assets/mw-favicon.png" />
     
     <!-- Open Graph / Meta -->
@@ -15,12 +19,56 @@
     <meta property="og:title" content="Mobile World Zürich Seebach — Express Reparaturen, Handyabos & Shop" />
     <meta property="og:description" content="Ihr zuverlässiger Partner für Smartphone- & Tablet-Reparaturen, günstige Handyabos und qualitätsgeprüfte Mobilgeräte in Zürich Seebach." />
     <meta property="og:image" content="/assets/modern-mobile-world-storefront-at-dusk.png" />
-    <meta property="og:url" content="https://www.mobileworldzh.ch/" />
+    <link rel="canonical" href="https://www.mobileworldzh.ch/" />
 
-    <!-- Google Fonts: Plus Jakarta Sans, Space Grotesk & Inter -->
+    <!-- Schema.org LocalBusiness & Repair Store JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ElectronicsStore",
+      "name": "Mobile World ZH Seebach",
+      "image": "https://www.mobileworldzh.ch/assets/modern-mobile-world-storefront-at-dusk.png",
+      "@id": "https://www.mobileworldzh.ch",
+      "url": "https://www.mobileworldzh.ch",
+      "telephone": "+41445436333",
+      "priceRange": "CHF",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Schaffhauserstrasse 455",
+        "addressLocality": "Zürich",
+        "postalCode": "8052",
+        "addressCountry": "CH"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 47.4182716,
+        "longitude": 8.5464912
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "09:00",
+          "closes": "19:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "10:00",
+          "closes": "18:00"
+        }
+      ],
+      "sameAs": [
+        "https://wa.me/41783448888",
+        "https://www.google.com/maps/place/Mobile+World+ZH+Seebach"
+      ]
+    }
+    </script>
+
+    <!-- Google Fonts: Inter Tight & Instrument Serif (Raphus Design Language) + System Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:ital,wght@0,300..900;1,300..900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   </head>
   <body>
     <div id="root"></div>

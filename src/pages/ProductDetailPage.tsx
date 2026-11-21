@@ -25,6 +25,14 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ productId,
   const product = mockDb.getProductById(productId);
   const { addToCart } = useCart();
   const [selectedQty, setSelectedQty] = useState(1);
+  const [isAdded, setIsAdded] = useState(false);
+
+  const handleAddToCart = () => {
+    if (!product) return;
+    addToCart(product, selectedQty);
+    setIsAdded(true);
+    setTimeout(() => setIsAdded(false), 1400);
+  };
 
   if (!product) {
     return (
@@ -52,7 +60,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ productId,
   return (
     <div style={{ backgroundColor: '#F5F6F8', paddingBottom: '6rem' }}>
       {/* Breadcrumbs */}
-      <div style={{ backgroundColor: '#FFFFFF', borderBottom: '1px solid #E2E6EC', padding: '1rem 0' }}>
+      <div style={{ backgroundColor: '#FFFFFF', borderBottom: '1px solid #E8E8E8', padding: '7.5rem 0 1.25rem' }}>
         <div className="container" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: '#64748B' }}>
           <button
             onClick={() => onNavigate('/')}
@@ -79,7 +87,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ productId,
           style={{
             backgroundColor: '#FFFFFF',
             borderRadius: '24px',
-            border: '1px solid #DFE3E9',
+            border: '1px solid #E8E8E8',
             boxShadow: '0 12px 36px rgba(16, 19, 24, 0.05)',
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
@@ -149,11 +157,11 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ productId,
               borderBottom: '1px solid #F1F5F9',
               paddingBottom: '1.25rem'
             }}>
-              <span style={{ fontSize: '2.5rem', fontWeight: 700, fontFamily: 'var(--font-heading)', color: '#101318' }}>
+              <span style={{ fontSize: '2.5rem', fontWeight: 700, fontFamily: 'var(--font-heading)', color: '#101318', whiteSpace: 'nowrap' }}>
                 CHF {product.priceChf.toFixed(2)}
               </span>
               {product.originalPriceChf && (
-                <span style={{ fontSize: '1.1rem', color: '#94A3B8', textDecoration: 'line-through' }}>
+                <span style={{ fontSize: '1.1rem', color: '#94A3B8', textDecoration: 'line-through', whiteSpace: 'nowrap' }}>
                   CHF {product.originalPriceChf.toFixed(2)}
                 </span>
               )}
@@ -240,13 +248,23 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ productId,
               )}
 
               <button
-                onClick={() => addToCart(product, selectedQty)}
+                onClick={handleAddToCart}
                 disabled={isOutOfStock}
-                className="btn btn-primary btn-lg"
-                style={{ flexGrow: 1 }}
+                className="btn-raphus-slide btn-raphus-slide-filled"
+                style={{
+                  flexGrow: 1,
+                  minHeight: '52px',
+                  backgroundColor: isAdded ? '#10B981 !important' : undefined,
+                  borderColor: isAdded ? '#10B981 !important' : undefined,
+                  color: '#FFFFFF'
+                }}
               >
-                <ShoppingBag size={18} />
-                {isOutOfStock ? 'Nicht verfügbar' : 'In den Warenkorb'}
+                <span className="btn-slide-badge">
+                  {isAdded ? <CheckCircle size={15} className="btn-slide-icon" /> : <ShoppingBag size={15} className="btn-slide-icon" />}
+                </span>
+                <span className="btn-slide-text">
+                  {isAdded ? 'Erfolgreich hinzugefügt' : isOutOfStock ? 'Derzeit ausverkauft' : 'In den Warenkorb'}
+                </span>
               </button>
             </div>
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Building2, Users, ShieldCheck, Clock, CheckCircle, ArrowRight, Phone, Mail } from 'lucide-react';
+import { Building2, Users, ShieldCheck, Clock, CheckCircle, ArrowRight, Phone, Mail, AlertCircle } from 'lucide-react';
 import { mockDb } from '../data/mockDb';
 
 interface BusinessPageProps {
@@ -15,6 +15,8 @@ export const BusinessPage: React.FC<BusinessPageProps> = ({ onNavigate }) => {
   const [deviceCount, setDeviceCount] = useState('10–25 Geräte');
   const [servicesNeeded, setServicesNeeded] = useState<string[]>(['Flotten-Reparaturen']);
   const [message, setMessage] = useState('');
+  const [formError, setFormError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   const toggleService = (svc: string) => {
@@ -25,26 +27,50 @@ export const BusinessPage: React.FC<BusinessPageProps> = ({ onNavigate }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    mockDb.addEnquiry({
-      type: 'business',
-      customerName: contactPerson,
-      email,
-      phone,
-      branch: 'Seebach',
-      details: {
-        organizationName: orgName,
-        orgType,
-        deviceCount,
-        servicesNeeded: servicesNeeded.join(', ')
-      },
-      message: message || `Firmenanfrage von ${orgName} (${orgType}) mit ca. ${deviceCount}.`
-    });
-    setSubmitted(true);
+    setFormError('');
+
+    if (!orgName.trim()) {
+      setFormError('Bitte geben Sie den Namen Ihrer Organisation oder Firma an.');
+      return;
+    }
+    if (!contactPerson.trim()) {
+      setFormError('Bitte geben Sie eine Ansprechperson an.');
+      return;
+    }
+    if (!email.trim() || !email.includes('@') || !email.includes('.')) {
+      setFormError('Bitte geben Sie eine gültige geschäftliche E-Mail-Adresse an.');
+      return;
+    }
+    if (!phone.trim() || phone.trim().length < 8) {
+      setFormError('Bitte geben Sie eine gültige Telefonnummer für Rückfragen an.');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    setTimeout(() => {
+      mockDb.addEnquiry({
+        type: 'business',
+        customerName: contactPerson.trim(),
+        email: email.trim(),
+        phone: phone.trim(),
+        branch: 'Seebach',
+        details: {
+          organizationName: orgName.trim(),
+          orgType,
+          deviceCount,
+          servicesNeeded: servicesNeeded.join(', ')
+        },
+        message: message || `Firmenanfrage von ${orgName} (${orgType}) mit ca. ${deviceCount}.`
+      });
+      setIsSubmitting(false);
+      setSubmitted(true);
+    }, 450);
   };
 
   return (
     <div style={{ backgroundColor: '#F5F6F8', paddingBottom: '6rem' }}>
-      <div style={{ backgroundColor: '#101318', color: '#FFFFFF', padding: '5rem 0' }}>
+      <div style={{ backgroundColor: '#101318', color: '#FFFFFF', padding: '7.5rem 0 4.5rem' }}>
         <div className="container" style={{ maxWidth: '850px', textAlign: 'center' }}>
           <span className="section-eyebrow" style={{ color: '#7096FF' }}>B2B &amp; Corporate Solutions</span>
           <h1 style={{
@@ -148,7 +174,22 @@ export const BusinessPage: React.FC<BusinessPageProps> = ({ onNavigate }) => {
 
             {submitted ? (
               <div style={{ textAlign: 'center', padding: '2rem 1rem' }}>
-                <CheckCircle size={48} color="#10B981" style={{ margin: '0 auto 1rem' }} />
+                <div 
+                  className="animate-spring-pop"
+                  style={{
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    color: '#10B981',
+                    width: '64px',
+                    height: '64px',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    margin: '0 auto 1.25rem'
+                  }}
+                >
+                  <CheckCircle size={36} />
+                </div>
                 <h4 style={{ fontSize: '1.3rem', marginBottom: '0.5rem' }}>Vielen Dank für Ihre Anfrage!</h4>
                 <p style={{ color: '#64748B', fontSize: '0.95rem', marginBottom: '1.5rem', lineHeight: 1.5 }}>
                   Wir haben Ihre B2B-Anfrage für <strong>{orgName}</strong> erhalten. Unser Geschäftskunden-Betreuer wird sich innerhalb eines Werktags bei Ihnen melden.
@@ -159,6 +200,26 @@ export const BusinessPage: React.FC<BusinessPageProps> = ({ onNavigate }) => {
               </div>
             ) : (
               <form onSubmit={handleSubmit}>
+                {formError && (
+                  <div 
+                    role="alert"
+                    style={{
+                      backgroundColor: 'rgba(239, 68, 68, 0.08)',
+                      border: '1px solid #EF4444',
+                      borderRadius: '10px',
+                      padding: '0.75rem 1rem',
+                      marginBottom: '1.25rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.65rem',
+                      color: '#B91C1C',
+                      fontSize: '0.875rem'
+                    }}
+                  >
+                    <AlertCircle size={18} color="#EF4444" style={{ flexShrink: 0 }} />
+                    <span>{formError}</span>
+                  </div>
+                )}
                 <div className="form-group">
                   <label className="form-label">Name der Organisation / Firma *</label>
                   <input
@@ -270,8 +331,16 @@ export const BusinessPage: React.FC<BusinessPageProps> = ({ onNavigate }) => {
                   />
                 </div>
 
-                <button type="submit" className="btn btn-primary btn-lg" style={{ width: '100%' }}>
-                  Kollektivangebot anfordern
+                <button 
+                  type="submit" 
+                  disabled={isSubmitting}
+                  className="btn-raphus-slide btn-raphus-slide-filled w-full"
+                  style={{ minHeight: '52px' }}
+                >
+                  <span className="btn-slide-badge"><Building2 size={15} className="btn-slide-icon" /></span>
+                  <span className="btn-slide-text">
+                    {isSubmitting ? 'Wird übermittelt...' : 'Kollektivangebot anfordern'}
+                  </span>
                 </button>
               </form>
             )}

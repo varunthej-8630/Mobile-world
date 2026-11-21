@@ -44,7 +44,7 @@ export const BRANCHES: Branch[] = [
       saturday: '10:00 – 18:00 Uhr',
       sunday: 'Geschlossen'
     },
-    googleMapsUrl: 'https://maps.google.com/?q=Gottfried-Keller-Strasse+5+8001+Zürich',
+    googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Mobile+World+Gottfried-Keller-Strasse+5+8001+Z%C3%BCrich',
     transitInfo: 'Nur 2 Gehminuten vom Bahnhof Stadelhofen & Tramhaltestelle Bellevue.',
     features: [
       'Zentraler City-Standort am Bahnhof Stadelhofen',
@@ -69,7 +69,7 @@ export const BRANCHES: Branch[] = [
       saturday: '09:00 – 17:00 Uhr',
       sunday: 'Geschlossen'
     },
-    googleMapsUrl: 'https://maps.google.com/?q=Dorfstrasse+4+8630+Rüti',
+    googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Mobile+World+Dorfstrasse+4+8630+R%C3%BCti',
     transitInfo: 'Zentral an der Dorfstrasse gelegen, wenige Gehminuten vom Bahnhof Rüti ZH.',
     features: [
       'Express Reparatur-Annahme im Zürcher Oberland',
@@ -94,7 +94,7 @@ export const BRANCHES: Branch[] = [
       saturday: '09:00 – 17:00 Uhr',
       sunday: 'Geschlossen'
     },
-    googleMapsUrl: 'https://maps.google.com/?q=Im+Zentrum+1+8102+Oberengstringen',
+    googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Mobile+World+Im+Zentrum+1+8102+Oberengstringen',
     transitInfo: 'Im Einkaufszentrum Im Zentrum mit zahlreichen Parkplätzen und Busverbindungen nach Zürich.',
     features: [
       'Bequemer Zugang mit Gratis-Kundenparkplätzen',

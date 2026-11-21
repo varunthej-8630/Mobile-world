@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, CheckCircle, Wrench, Phone, MessageSquare, MapPin } from 'lucide-react';
+import { X, CheckCircle, Wrench, Phone, MessageSquare, MapPin, AlertCircle } from 'lucide-react';
 import { RepairPriceRecord } from '../../types';
 import { mockDb } from '../../data/mockDb';
 
@@ -14,46 +14,22 @@ export const RepairEnquiryModal: React.FC<RepairEnquiryModalProps> = ({ repair, 
   const [phone, setPhone] = useState('');
   const [branch, setBranch] = useState('Seebach (Schaffhauserstrasse 455)');
   const [message, setMessage] = useState('');
+  const [formError, setFormError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-
-  if (!repair) return null;
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!name || !email || !phone) {
-      alert('Bitte füllen Sie Name, E-Mail und Telefonnummer aus.');
-      return;
-    }
-
-    mockDb.addEnquiry({
-      type: 'repair',
-      customerName: name,
-      email,
-      phone,
-      branch,
-      details: {
-        manufacturer: repair.manufacturer,
-        model: repair.model,
-        repairTask: repair.repairTask,
-        priceChf: `CHF ${repair.priceChf}.-`,
-        duration: repair.durationEstimate
-      },
-      message: message || 'Reparatur-Terminanfrage via Website Rechner'
-    });
-
-    setIsSubmitted(true);
-  };
 
   // Lock body scroll when repair modal is open
   React.useEffect(() => {
+    if (!repair) return;
     document.body.style.overflow = 'hidden';
     return () => {
       document.body.style.overflow = '';
     };
-  }, []);
+  }, [repair]);
 
   // Handle escape key
   React.useEffect(() => {
+    if (!repair) return;
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onClose();
@@ -61,7 +37,50 @@ export const RepairEnquiryModal: React.FC<RepairEnquiryModalProps> = ({ repair, 
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onClose]);
+  }, [repair, onClose]);
+
+  if (!repair) return null;
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormError('');
+
+    if (!name.trim()) {
+      setFormError('Bitte geben Sie Ihren vollständigen Namen ein.');
+      return;
+    }
+    if (!email.trim() || !email.includes('@') || !email.includes('.')) {
+      setFormError('Bitte geben Sie eine gültige E-Mail-Adresse ein.');
+      return;
+    }
+    if (!phone.trim() || phone.trim().length < 8) {
+      setFormError('Bitte geben Sie eine gültige Schweizer Telefonnummer an (z.B. +41 79 123 45 67).');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    setTimeout(() => {
+      mockDb.addEnquiry({
+        type: 'repair',
+        customerName: name,
+        email,
+        phone,
+        branch,
+        details: {
+          manufacturer: repair.manufacturer,
+          model: repair.model,
+          repairTask: repair.repairTask,
+          priceChf: `CHF ${repair.priceChf}.-`,
+          duration: repair.durationEstimate
+        },
+        message: message || 'Reparatur-Terminanfrage via Website Rechner'
+      });
+
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+    }, 450);
+  };
 
   return (
     <div className="modal-backdrop" onClick={onClose}>
@@ -102,17 +121,20 @@ export const RepairEnquiryModal: React.FC<RepairEnquiryModalProps> = ({ repair, 
 
         {isSubmitted ? (
           <div style={{ textAlign: 'center', padding: '2rem 1rem' }}>
-            <div style={{
-              backgroundColor: 'rgba(16, 185, 129, 0.1)',
-              color: '#10B981',
-              width: '64px',
-              height: '64px',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              margin: '0 auto 1.25rem'
-            }}>
+            <div 
+              className="animate-spring-pop"
+              style={{
+                backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                color: '#10B981',
+                width: '64px',
+                height: '64px',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto 1.25rem'
+              }}
+            >
               <CheckCircle size={36} />
             </div>
             <h4 style={{ fontSize: '1.35rem', marginBottom: '0.5rem', fontFamily: 'var(--font-heading)' }}>
@@ -182,6 +204,27 @@ export const RepairEnquiryModal: React.FC<RepairEnquiryModalProps> = ({ repair, 
               </div>
             </div>
 
+            {formError && (
+              <div 
+                role="alert"
+                style={{
+                  backgroundColor: 'rgba(239, 68, 68, 0.08)',
+                  border: '1px solid #EF4444',
+                  borderRadius: '10px',
+                  padding: '0.75rem 1rem',
+                  marginBottom: '1.25rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.65rem',
+                  color: '#B91C1C',
+                  fontSize: '0.875rem'
+                }}
+              >
+                <AlertCircle size={18} color="#EF4444" style={{ flexShrink: 0 }} />
+                <span>{formError}</span>
+              </div>
+            )}
+
             <div className="form-group">
               <label className="form-label">Vor- und Nachname *</label>
               <input
@@ -246,8 +289,13 @@ export const RepairEnquiryModal: React.FC<RepairEnquiryModalProps> = ({ repair, 
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '1.5rem' }}>
-              <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '0.85rem' }}>
-                Anfrage jetzt absenden
+              <button 
+                type="submit" 
+                className={`btn btn-primary ${isSubmitting ? 'btn-loading' : ''}`}
+                disabled={isSubmitting}
+                style={{ width: '100%', padding: '0.85rem' }}
+              >
+                {isSubmitting ? 'Wird übermittelt...' : 'Anfrage jetzt absenden'}
               </button>
 
               <div style={{

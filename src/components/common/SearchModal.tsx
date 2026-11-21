@@ -90,10 +90,11 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose, onNav
           <div style={{ padding: '1rem', color: '#64748B', fontSize: '0.9rem' }}>
             <div style={{ fontWeight: 600, color: '#101318', marginBottom: '0.5rem' }}>Häufige Suchbegriffe:</div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-              {['iPhone 15 Pro Display', 'Samsung S24 Ultra', 'Akku tauschen', 'AirPods Pro', 'Sunrise Abo', 'Refurbished'].map(tag => (
+              {['iPhone 15 Pro Display', 'Samsung S24 Ultra', 'Akku tauschen', 'AirPods Pro', 'Sunrise Abo', 'Refurbished'].map((tag, i) => (
                 <button
                   key={tag}
                   onClick={() => setQuery(tag)}
+                  className={`stagger-item stagger-${(i % 6) + 1}`}
                   style={{
                     backgroundColor: '#F1F5F9',
                     border: '1px solid #E2E6EC',
@@ -101,7 +102,18 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose, onNav
                     padding: '0.35rem 0.75rem',
                     fontSize: '0.825rem',
                     cursor: 'pointer',
-                    color: '#334155'
+                    color: '#334155',
+                    transition: 'all var(--motion-micro) var(--ease-out-expo)'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = 'rgba(23, 76, 255, 0.08)';
+                    e.currentTarget.style.borderColor = '#174CFF';
+                    e.currentTarget.style.color = '#174CFF';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = '#F1F5F9';
+                    e.currentTarget.style.borderColor = '#E2E6EC';
+                    e.currentTarget.style.color = '#334155';
                   }}
                 >
                   {tag}
@@ -127,9 +139,10 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose, onNav
                   <ShoppingBag size={14} /> Shop-Produkte ({matchingProducts.length})
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-                  {matchingProducts.map(prod => (
+                  {matchingProducts.map((prod, idx) => (
                     <div
                       key={prod.id}
+                      className={`stagger-item stagger-${(idx % 6) + 1}`}
                       onClick={() => {
                         onNavigate(`/product/${prod.id}`);
                         onClose();
@@ -141,7 +154,19 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose, onNav
                         padding: '0.65rem 0.85rem',
                         borderRadius: '8px',
                         backgroundColor: '#F8FAFC',
-                        cursor: 'pointer'
+                        border: '1px solid #E2E8F0',
+                        cursor: 'pointer',
+                        transition: 'transform var(--motion-micro) var(--ease-press), background-color var(--motion-micro) ease, border-color var(--motion-micro) ease'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = '#EFF6FF';
+                        e.currentTarget.style.borderColor = '#BFDBFE';
+                        e.currentTarget.style.transform = 'translateY(-1px)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = '#F8FAFC';
+                        e.currentTarget.style.borderColor = '#E2E8F0';
+                        e.currentTarget.style.transform = 'translateY(0)';
                       }}
                     >
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
@@ -184,9 +209,10 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose, onNav
                   <Wrench size={14} /> Reparaturpreise ({matchingRepairs.length})
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-                  {matchingRepairs.map(rep => (
+                  {matchingRepairs.map((rep, idx) => (
                     <div
                       key={rep.id}
+                      className={`stagger-item stagger-${(idx % 6) + 1}`}
                       onClick={() => {
                         onNavigate('/repair-prices');
                         onClose();
@@ -198,7 +224,19 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose, onNav
                         padding: '0.65rem 0.85rem',
                         borderRadius: '8px',
                         backgroundColor: '#F8FAFC',
-                        cursor: 'pointer'
+                        border: '1px solid #E2E8F0',
+                        cursor: 'pointer',
+                        transition: 'transform var(--motion-micro) var(--ease-press), background-color var(--motion-micro) ease, border-color var(--motion-micro) ease'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = '#EFF6FF';
+                        e.currentTarget.style.borderColor = '#BFDBFE';
+                        e.currentTarget.style.transform = 'translateY(-1px)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = '#F8FAFC';
+                        e.currentTarget.style.borderColor = '#E2E8F0';
+                        e.currentTarget.style.transform = 'translateY(0)';
                       }}
                     >
                       <div>

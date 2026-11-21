@@ -11,28 +11,54 @@ export const InsurancePage: React.FC<InsurancePageProps> = ({ onNavigate }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [formError, setFormError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    mockDb.addEnquiry({
-      type: 'general',
-      customerName: name,
-      email,
-      phone,
-      branch: 'Seebach',
-      details: {
-        topic: 'MobileWorld Care Versicherung',
-        deviceModel
-      },
-      message: `Versicherungsanfrage für Gerät: ${deviceModel}`
-    });
-    setSubmitted(true);
+    setFormError('');
+
+    if (!deviceModel.trim()) {
+      setFormError('Bitte geben Sie Ihr Gerätemodell an.');
+      return;
+    }
+    if (!name.trim()) {
+      setFormError('Bitte geben Sie Ihren vollständigen Namen ein.');
+      return;
+    }
+    if (!email.trim() || !email.includes('@') || !email.includes('.')) {
+      setFormError('Bitte geben Sie eine gültige E-Mail-Adresse ein.');
+      return;
+    }
+    if (!phone.trim() || phone.trim().length < 8) {
+      setFormError('Bitte geben Sie eine gültige Schweizer Telefonnummer an.');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    setTimeout(() => {
+      mockDb.addEnquiry({
+        type: 'general',
+        customerName: name.trim(),
+        email: email.trim(),
+        phone: phone.trim(),
+        branch: 'Seebach',
+        details: {
+          topic: 'MobileWorld Care Versicherung',
+          deviceModel: deviceModel.trim()
+        },
+        message: `Versicherungsanfrage für Gerät: ${deviceModel.trim()}`
+      });
+      setIsSubmitting(false);
+      setSubmitted(true);
+    }, 450);
   };
 
   return (
     <div style={{ backgroundColor: '#F5F6F8', paddingBottom: '6rem' }}>
-      <div style={{ backgroundColor: '#101318', color: '#FFFFFF', padding: '5rem 0' }}>
+      <div style={{ backgroundColor: '#101318', color: '#FFFFFF', padding: '7.5rem 0 4.5rem' }}>
         <div className="container" style={{ maxWidth: '850px', textAlign: 'center' }}>
           <span className="section-eyebrow" style={{ color: '#7096FF' }}>MobileWorld Care Geräteschutz</span>
           <h1 style={{
@@ -109,7 +135,22 @@ export const InsurancePage: React.FC<InsurancePageProps> = ({ onNavigate }) => {
           >
             {submitted ? (
               <div style={{ textAlign: 'center', padding: '2rem 1rem' }}>
-                <CheckCircle size={48} color="#10B981" style={{ margin: '0 auto 1rem' }} />
+                <div 
+                  className="animate-spring-pop"
+                  style={{
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    color: '#10B981',
+                    width: '64px',
+                    height: '64px',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    margin: '0 auto 1.25rem'
+                  }}
+                >
+                  <CheckCircle size={36} />
+                </div>
                 <h3 style={{ fontSize: '1.35rem', marginBottom: '0.5rem' }}>Anfrage eingegangen!</h3>
                 <p style={{ color: '#64748B', fontSize: '0.95rem', marginBottom: '1.5rem' }}>
                   Wir melden uns in Kürze mit einem massgeschneiderten Versicherungsangebot für Ihr {deviceModel}.
@@ -123,6 +164,27 @@ export const InsurancePage: React.FC<InsurancePageProps> = ({ onNavigate }) => {
                 <h3 style={{ fontSize: '1.25rem', fontFamily: 'var(--font-heading)', marginBottom: '1.25rem' }}>
                   Geräteschutz unverbindlich anfragen
                 </h3>
+
+                {formError && (
+                  <div 
+                    role="alert"
+                    style={{
+                      backgroundColor: 'rgba(239, 68, 68, 0.08)',
+                      border: '1px solid #EF4444',
+                      borderRadius: '10px',
+                      padding: '0.75rem 1rem',
+                      marginBottom: '1.25rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.65rem',
+                      color: '#B91C1C',
+                      fontSize: '0.875rem'
+                    }}
+                  >
+                    <AlertCircle size={18} color="#EF4444" style={{ flexShrink: 0 }} />
+                    <span>{formError}</span>
+                  </div>
+                )}
 
                 <div className="form-group">
                   <label className="form-label">Ihr Gerätemodell *</label>
@@ -172,8 +234,16 @@ export const InsurancePage: React.FC<InsurancePageProps> = ({ onNavigate }) => {
                   />
                 </div>
 
-                <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }}>
-                  Schutzplan anfragen
+                <button 
+                  type="submit" 
+                  disabled={isSubmitting}
+                  className="btn-raphus-slide btn-raphus-slide-filled w-full"
+                  style={{ minHeight: '52px', marginTop: '1rem' }}
+                >
+                  <span className="btn-slide-badge"><ShieldCheck size={15} className="btn-slide-icon" /></span>
+                  <span className="btn-slide-text">
+                    {isSubmitting ? 'Wird übermittelt...' : 'Schutzplan anfragen'}
+                  </span>
                 </button>
               </form>
             )}

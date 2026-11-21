@@ -6,7 +6,6 @@ import { SearchModal } from './components/common/SearchModal';
 import { CartDrawer } from './components/shop/CartDrawer';
 import { RepairEnquiryModal } from './components/repair/RepairEnquiryModal';
 import { SubscriptionEnquiryModal } from './components/subscription/SubscriptionEnquiryModal';
-import { CinematicIntro } from './components/common/CinematicIntro';
 
 // Pages
 import { HomePage } from './pages/HomePage';
@@ -31,10 +30,14 @@ import { AdminDashboardPage } from './pages/AdminDashboardPage';
 import { PrivacyPage } from './pages/PrivacyPage';
 import { TermsPage } from './pages/TermsPage';
 import { ImprintPage } from './pages/ImprintPage';
+import { NotFoundPage } from './pages/NotFoundPage';
 
 import { RepairPriceRecord, SubscriptionPlan } from './types';
+import { updatePageMetadata } from './utils/seo';
+import { useAuth } from './context/AuthContext';
 
 export const App: React.FC = () => {
+  const { isAuthenticated } = useAuth();
   // Routing state based on hash or default to '/'
   const [currentPath, setCurrentPath] = useState<string>(() => {
     const hash = window.location.hash.replace(/^#/, '');
@@ -57,6 +60,11 @@ export const App: React.FC = () => {
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
+
+  // Update document title and meta description on route change
+  useEffect(() => {
+    updatePageMetadata(currentPath);
+  }, [currentPath]);
 
   const handleNavigate = (path: string) => {
     window.location.hash = path;
@@ -142,6 +150,12 @@ export const App: React.FC = () => {
         return <SeebachLocationPage onNavigate={handleNavigate} />;
 
       case '/account':
+        return isAuthenticated ? (
+          <AccountProfilePage onNavigate={handleNavigate} />
+        ) : (
+          <AccountLoginPage onNavigate={handleNavigate} />
+        );
+
       case '/account/register':
       case '/account/forgot-password':
         return <AccountLoginPage onNavigate={handleNavigate} />;
@@ -162,39 +176,48 @@ export const App: React.FC = () => {
         return <ImprintPage onNavigate={handleNavigate} />;
 
       default:
-        // Fallback to Home if unknown route
-        return (
-          <HomePage
-            onNavigate={handleNavigate}
-            onOpenRepairEnquiry={(repair) => setSelectedRepairForEnquiry(repair)}
-            onOpenSubEnquiry={(plan) => setSelectedPlanForEnquiry(plan)}
-          />
-        );
+        // Graceful 404 Not Found state for invalid/unknown URLs
+        return <NotFoundPage onNavigate={handleNavigate} />;
     }
   };
 
+  const isAdminRoute = currentPath.replace(/^\//, '').startsWith('admin') || currentPath.replace(/^\//, '').startsWith('staff');
+
   return (
     <div className="flex flex-col min-h-screen bg-porcelain text-graphite antialiased font-sans">
-      {/* Cinematic Opening Intro Animation (plays once per session) */}
-      <CinematicIntro />
+      {/* WCAG 2.2 AA: Skip to main content link */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-cobalt focus:text-white focus:rounded-lg focus:shadow-lg focus:text-sm focus:font-semibold"
+      >
+        Direkt zum Hauptinhalt springen
+      </a>
 
       {/* Top Prototype Transparency Banner */}
       <PrototypeBanner onNavigate={handleNavigate} />
 
-      {/* Main Header */}
-      <Header
-        currentPath={currentPath}
-        onNavigate={handleNavigate}
-        onOpenSearch={() => setSearchOpen(true)}
-      />
+      {/* Main Header (Rendered on public & customer portal, omitted in dedicated back-office) */}
+      {!isAdminRoute && (
+        <Header
+          currentPath={currentPath}
+          onNavigate={handleNavigate}
+          onOpenSearch={() => setSearchOpen(true)}
+        />
+      )}
 
       {/* Page Content View */}
-      <main className="flex-1" style={{ paddingTop: currentPath === '/' ? '0' : '84px' }}>
+      <main 
+        id="main-content" 
+        className="flex-1" 
+        style={{ 
+          paddingTop: '0' 
+        }}
+      >
         {renderCurrentPage()}
       </main>
 
-      {/* Global Footer */}
-      <Footer onNavigate={handleNavigate} />
+      {/* Global Footer (Omitted in dedicated back-office) */}
+      {!isAdminRoute && <Footer onNavigate={handleNavigate} />}
 
       {/* Modals & Drawers */}
       <SearchModal

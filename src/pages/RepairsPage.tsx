@@ -20,136 +20,240 @@ export const RepairsPage: React.FC<RepairsPageProps> = ({ onNavigate }) => {
   const repairCategories = [
     {
       icon: Smartphone,
-      title: 'Display & Touchscreen Reparatur',
-      desc: 'Glasbruch, Streifen im Bild, Ausfall des Touchscreens oder schwarzer Bildschirm. Wir tauschen die Displayeinheit schnell und passgenau mit OEM- oder Soft-OLED-Displays aus.',
-      time: '30–45 Min.'
+      emoji: '📱',
+      tag: 'EXPRESS-SERVICE · 30–45 MIN.',
+      title: 'Display & Touchscreen',
+      desc: 'Glasbruch, Streifen im Bild, Ausfall des Touchscreens oder schwarzer Bildschirm. Schneller Tausch mit passgenauen OEM- oder Soft-OLED-Displays.',
+      time: '30–45 Min.',
+      bg: '#F7F0FE',
+      border: '#E9D7FE',
+      accent: '#7E22CE',
+      hoverShadow: 'rgba(186, 129, 238, 0.15)'
     },
     {
       icon: BatteryCharging,
-      title: 'Akku / Batterie Austausch',
-      desc: 'Akku entlädt sich schnell, Gerät schaltet sich bei Kälte ab oder bläht sich auf. Neuer Akku mit 100% Kapazität inklusive fachgerechter Entsorgung des Altakkus.',
-      time: '20–30 Min.'
+      emoji: '🔋',
+      tag: '100% KAPAZITÄT · 20–30 MIN.',
+      title: 'Akku & Batterie-Service',
+      desc: 'Akku entlädt sich schnell, Gerät schaltet sich bei Kälte ab oder bläht sich auf. Neue Qualitätszellen inklusive sicherer Fach-Entsorgung.',
+      time: '20–30 Min.',
+      bg: '#EFF6FF',
+      border: '#BFDBFE',
+      accent: '#1D4ED8',
+      hoverShadow: 'rgba(73, 40, 253, 0.15)'
     },
     {
       icon: Zap,
+      emoji: '⚡',
+      tag: 'ORIGINAL-BUCHSE · 45–60 MIN.',
       title: 'Ladeanschluss & Mikrofon',
-      desc: 'Wackelkontakt beim Ladekabel, Gerät lädt gar nicht mehr oder der Gesprächspartner versteht Sie nicht. Tausch der USB-C oder Lightning Ladebuchse.',
-      time: '45–60 Min.'
+      desc: 'Wackelkontakt beim Ladekabel, Gerät lädt gar nicht mehr oder der Gesprächspartner versteht Sie nicht. Tausch der USB-C oder Lightning Buchse.',
+      time: '45–60 Min.',
+      bg: '#FFF7ED',
+      border: '#FED7AA',
+      accent: '#C2410C',
+      hoverShadow: 'rgba(255, 175, 104, 0.18)'
     },
     {
       icon: Droplets,
-      title: 'Wasserschaden & Ultraschall',
-      desc: 'Gerät ins Wasser gefallen? Nicht einschalten! In unserer Werkstatt Seebach reinigen wir die Platine im professionellen Ultraschallbad von Korrosion.',
-      time: '2–4 Std.'
+      emoji: '💧',
+      tag: 'ULTRASCHALL · 2–4 STD.',
+      title: 'Wasserschaden & Platine',
+      desc: 'Gerät ins Wasser gefallen? Nicht einschalten! In unserer Zürcher Werkstatt reinigen wir die Platine im professionellen Ultraschallbad von Korrosion.',
+      time: '2–4 Std.',
+      bg: '#F0FDF4',
+      border: '#BBF7D0',
+      accent: '#15803D',
+      hoverShadow: 'rgba(121, 212, 94, 0.18)'
     },
     {
       icon: Camera,
+      emoji: '📷',
+      tag: 'PRÄZISIONS-OPTIK · 30–45 MIN.',
       title: 'Kamera & Kameraglas',
-      desc: 'Verschwommene Fotos, zerkratztes Kameraglas oder defekter Autofokus. Wir tauschen Hauptkamera, Frontkamera oder das Schutzglas der Rückseite.',
-      time: '30–45 Min.'
+      desc: 'Verschwommene Fotos, zerkratztes Schutzglas oder defekter Autofokus. Schneller Austausch von Hauptkamera, Frontkamera oder Saphir-Deckglas.',
+      time: '30–45 Min.',
+      bg: '#FDF2F8',
+      border: '#FBCFE8',
+      accent: '#BE123C',
+      hoverShadow: 'rgba(244, 136, 154, 0.18)'
     },
     {
       icon: Wrench,
-      title: 'Rückseite / Back Cover Glas',
-      desc: 'Gebrochene Glasrückseite bei neueren iPhones und Samsung-Geräten. Professionelle Laser-Demontage und Ersatz mit präziser Original-Passform.',
-      time: '60–90 Min.'
+      emoji: '🛠️',
+      tag: 'LASER-DEMONTAGE · 60–90 MIN.',
+      title: 'Rückseite & Back Cover',
+      desc: 'Gebrochene Glasrückseite bei iPhone oder Samsung. Präzise Laser-Demontage und Ersatz mit lückenloser Passform wie am ersten Tag.',
+      time: '60–90 Min.',
+      bg: '#F0F9FF',
+      border: '#BAE6FD',
+      accent: '#0369A1',
+      hoverShadow: 'rgba(125, 211, 252, 0.18)'
     }
   ];
 
   return (
-    <div style={{ backgroundColor: '#F5F6F8', paddingBottom: '6rem' }}>
-      {/* Hero */}
-      <div style={{ backgroundColor: '#101318', color: '#FFFFFF', padding: '5rem 0' }}>
-        <div className="container" style={{ maxWidth: '850px', textAlign: 'center' }}>
-          <span className="section-eyebrow" style={{ color: '#7096FF' }}>Express Werkstatt Zürich Seebach</span>
+    <div style={{ backgroundColor: '#F4F4F4', paddingBottom: '6rem' }}>
+      {/* Hero (Raphus Style) */}
+      <div 
+        className="bg-gradient-shaph bg-white border-b border-[#E8E8E8]"
+        style={{
+          paddingTop: 'clamp(7.5rem, 12vh, 9.25rem)',
+          paddingBottom: '3.5rem'
+        }}
+      >
+        <div className="container" style={{ maxWidth: '850px', textAlign: 'center', position: 'relative', zIndex: 10 }}>
+          <span className="badge bg-secondary-subtle mb-3">Express Werkstatt Zürich Seebach</span>
           <h1 style={{
-            fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
-            color: '#FFFFFF',
+            fontSize: 'clamp(2.2rem, 4.5vw, 3.25rem)',
+            color: '#1B1D1E',
             fontFamily: 'var(--font-heading)',
-            marginBottom: '1.25rem',
-            lineHeight: 1.15
+            fontWeight: 800,
+            marginBottom: '1rem',
+            lineHeight: 1.15,
+            letterSpacing: '-0.02em'
           }}>
-            Professionelle Smartphone- &amp; Tablet-Reparaturen
+            Professionelle Smartphone- &amp; <em className="font-instrument text-[#4928FD]">Tablet-Reparaturen</em>
           </h1>
-          <p style={{ color: '#94A3B8', fontSize: '1.2rem', lineHeight: 1.6, marginBottom: '2.5rem' }}>
+          <p style={{ color: '#4B5563', fontSize: '1.15rem', lineHeight: 1.6, marginBottom: '2rem' }}>
             Schnell, zuverlässig und mit 6 Monaten Schweizer Garantie. Die meisten Reparaturen erledigen wir innerhalb von 30 bis 60 Minuten direkt vor Ort in unserer Werkstatt an der Schaffhauserstrasse 455.
           </p>
 
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
             <button
               onClick={() => onNavigate('/repair-prices')}
-              className="btn btn-primary btn-lg"
+              className="btn-raphus-slide btn-raphus-slide-primary"
             >
-              <Wrench size={18} /> Zum Reparaturpreis-Rechner
+              <span className="btn-slide-badge">
+                <ArrowRight size={16} className="btn-slide-icon" />
+              </span>
+              <span className="btn-slide-text">Zum Reparaturpreis-Rechner</span>
             </button>
             <button
               onClick={() => onNavigate('/contact')}
-              className="btn btn-outline-white btn-lg"
+              className="btn-raphus-slide btn-raphus-slide-dark"
             >
-              Werkstatt Seebach kontaktieren
+              <span className="btn-slide-badge">
+                <ArrowRight size={16} className="btn-slide-icon" />
+              </span>
+              <span className="btn-slide-text">Werkstatt Seebach kontaktieren</span>
             </button>
           </div>
         </div>
       </div>
 
-      <div className="container" style={{ marginTop: '4rem' }}>
+      <div className="container" style={{ marginTop: '3.5rem', maxWidth: '1280px' }}>
         {/* Service Pillars Grid */}
-        <div className="section-header text-center">
+        <div className="section-header text-center" style={{ marginBottom: '2.5rem' }}>
           <span className="section-eyebrow">Unsere Leistungen</span>
           <h2 className="section-title">Häufige Reparaturen im Detail</h2>
-          <p className="section-subtitle">
+          <p className="section-subtitle" style={{ maxWidth: '640px', margin: '0.5rem auto 0' }}>
             Egal ob Apple iPhone, Samsung Galaxy, Google Pixel oder Xiaomi: Wir reparieren alle gängigen Defekte nach höchsten Schweizer Standards.
           </p>
         </div>
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
           gap: '1.5rem',
           marginBottom: '5rem'
         }}>
           {repairCategories.map((cat, idx) => {
             const Icon = cat.icon;
             return (
-              <div key={idx} className="card p-5 sm:p-7 md:p-8" style={{ backgroundColor: '#FFFFFF' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem' }}>
-                  <div style={{
-                    backgroundColor: 'rgba(23, 76, 255, 0.1)',
-                    color: '#174CFF',
-                    padding: '0.75rem',
-                    borderRadius: '12px'
-                  }}>
-                    <Icon size={24} />
+              <div 
+                key={idx} 
+                onClick={() => onNavigate('/repair-prices')}
+                style={{ 
+                  backgroundColor: cat.bg,
+                  borderRadius: '24px',
+                  border: `1px solid ${cat.border}`,
+                  padding: '1.35rem 1.25rem',
+                  boxShadow: `0 4px 18px ${cat.hoverShadow}`,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  cursor: 'pointer',
+                  transition: 'all 240ms cubic-bezier(0.16, 1, 0.3, 1)'
+                }}
+                className="hover:-translate-y-1 hover:shadow-lg group"
+              >
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                    <div style={{
+                      width: '42px',
+                      height: '42px',
+                      borderRadius: '50%',
+                      backgroundColor: '#FFFFFF',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+                      color: cat.accent
+                    }}>
+                      <Icon size={20} />
+                    </div>
+                    <span 
+                      style={{
+                        backgroundColor: '#FFFFFF',
+                        color: '#1B1D1E',
+                        fontSize: '0.72rem',
+                        fontWeight: 700,
+                        padding: '0.25rem 0.65rem',
+                        borderRadius: '9999px',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.3rem',
+                        border: `1px solid ${cat.border}`,
+                        boxShadow: '0 1px 3px rgba(0,0,0,0.04)'
+                      }}
+                    >
+                      <Clock size={12} style={{ color: cat.accent }} /> {cat.time}
+                    </span>
                   </div>
-                  <span className="badge badge-blue" style={{ fontSize: '0.75rem' }}>
-                    <Clock size={12} /> {cat.time}
-                  </span>
+
+                  <div style={{ 
+                    fontSize: '0.72rem', 
+                    fontWeight: 700, 
+                    textTransform: 'uppercase', 
+                    letterSpacing: '0.05em', 
+                    color: cat.accent, 
+                    marginBottom: '0.35rem' 
+                  }}>
+                    {cat.tag}
+                  </div>
+
+                  <h3 style={{ 
+                    fontSize: '1.15rem', 
+                    fontWeight: 700, 
+                    fontFamily: 'var(--font-heading)', 
+                    color: '#1B1D1E', 
+                    marginBottom: '0.45rem', 
+                    lineHeight: 1.25 
+                  }}>
+                    {cat.title}
+                  </h3>
+                  <p style={{ color: '#4B5563', fontSize: '0.85rem', lineHeight: 1.55, marginBottom: '1.25rem' }}>
+                    {cat.desc}
+                  </p>
                 </div>
 
-                <h3 style={{ fontSize: '1.25rem', marginBottom: '0.65rem', fontFamily: 'var(--font-heading)' }}>
-                  {cat.title}
-                </h3>
-                <p style={{ color: '#64748B', fontSize: '0.925rem', lineHeight: 1.6, marginBottom: '1.5rem' }}>
-                  {cat.desc}
-                </p>
-
-                <button
-                  onClick={() => onNavigate('/repair-prices')}
-                  style={{
-                    background: 'none',
-                    border: 'none',
-                    color: '#174CFF',
-                    fontWeight: 600,
-                    fontSize: '0.875rem',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '0.35rem',
-                    cursor: 'pointer',
-                    padding: 0
-                  }}
+                <div 
+                  style={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    gap: '0.35rem', 
+                    fontSize: '0.825rem', 
+                    fontWeight: 700, 
+                    color: cat.accent, 
+                    borderTop: `1px solid ${cat.border}`, 
+                    paddingTop: '0.85rem' 
+                  }} 
+                  className="group-hover:translate-x-1 transition-transform"
                 >
-                  Preis für Ihr Modell nachschlagen <ArrowRight size={14} />
-                </button>
+                  <span>Preis für Ihr Modell nachschlagen</span>
+                  <ArrowRight size={14} />
+                </div>
               </div>
             );
           })}

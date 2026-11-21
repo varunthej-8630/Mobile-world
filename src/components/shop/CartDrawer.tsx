@@ -50,6 +50,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onNavigate }) => {
     >
       <div 
         onClick={(e) => e.stopPropagation()}
+        className="drawer-right"
         style={{
           backgroundColor: '#FFFFFF',
           width: '100%',
@@ -57,8 +58,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onNavigate }) => {
           height: '100vh',
           display: 'flex',
           flexDirection: 'column',
-          boxShadow: '-10px 0 30px rgba(16, 19, 24, 0.2)',
-          animation: 'slideInRight 0.25s cubic-bezier(0.16, 1, 0.3, 1)'
+          boxShadow: '-10px 0 35px rgba(16, 19, 24, 0.25)'
         }}
       >
         {/* Drawer Header */}
@@ -94,18 +94,22 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onNavigate }) => {
         <div style={{ flexGrow: 1, overflowY: 'auto', padding: '1.5rem' }}>
           {checkoutComplete ? (
             <div style={{ textAlign: 'center', padding: '2rem 1rem' }}>
-              <div style={{
-                backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                color: '#10B981',
-                width: '60px',
-                height: '60px',
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                margin: '0 auto 1.25rem'
-              }}>
-                <CheckCircle size={32} />
+              <div 
+                className="animate-spring-pop"
+                style={{
+                  backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                  color: '#10B981',
+                  width: '64px',
+                  height: '64px',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  margin: '0 auto 1.25rem',
+                  boxShadow: '0 8px 24px rgba(16, 185, 129, 0.2)'
+                }}
+              >
+                <CheckCircle size={36} />
               </div>
               <h4 style={{ fontSize: '1.25rem', marginBottom: '0.5rem', fontFamily: 'var(--font-heading)' }}>
                 Reservierungs-Bestätigung
@@ -148,7 +152,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onNavigate }) => {
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              {cart.map((item) => (
+              {cart.map((item, idx) => (
                 <div
                   key={item.product.id}
                   style={{
@@ -157,7 +161,10 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onNavigate }) => {
                     padding: '0.85rem',
                     borderRadius: '10px',
                     border: '1px solid #E2E6EC',
-                    backgroundColor: '#FFFFFF'
+                    backgroundColor: '#FFFFFF',
+                    animation: 'staggerFadeUp var(--motion-reveal) var(--ease-out-expo) backwards',
+                    animationDelay: `${idx * 40}ms`,
+                    transition: 'border-color var(--motion-button) var(--ease-out-expo), box-shadow var(--motion-button) var(--ease-out-expo)'
                   }}
                 >
                   <img
@@ -193,11 +200,23 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onNavigate }) => {
                         gap: '0.4rem',
                         border: '1px solid #E2E6EC',
                         borderRadius: '6px',
-                        padding: '0.15rem 0.35rem'
+                        padding: '0.15rem 0.35rem',
+                        backgroundColor: '#F8FAFC'
                       }}>
                         <button
                           onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
-                          style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0.15rem' }}
+                          aria-label="Menge verringern"
+                          style={{
+                            background: 'none',
+                            border: 'none',
+                            cursor: 'pointer',
+                            padding: '0.2rem',
+                            display: 'flex',
+                            alignItems: 'center',
+                            transition: 'transform var(--motion-instant) var(--ease-press)'
+                          }}
+                          onPointerDown={(e) => e.currentTarget.style.transform = 'scale(0.85)'}
+                          onPointerUp={(e) => e.currentTarget.style.transform = 'scale(1)'}
                         >
                           <Minus size={13} />
                         </button>
@@ -207,13 +226,21 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onNavigate }) => {
                         <button
                           onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
                           disabled={item.quantity >= item.product.quantityOnHand}
+                          aria-label="Menge erhöhen"
                           style={{
                             background: 'none',
                             border: 'none',
                             cursor: item.quantity >= item.product.quantityOnHand ? 'not-allowed' : 'pointer',
                             opacity: item.quantity >= item.product.quantityOnHand ? 0.4 : 1,
-                            padding: '0.15rem'
+                            padding: '0.2rem',
+                            display: 'flex',
+                            alignItems: 'center',
+                            transition: 'transform var(--motion-instant) var(--ease-press)'
                           }}
+                          onPointerDown={(e) => {
+                            if (item.quantity < item.product.quantityOnHand) e.currentTarget.style.transform = 'scale(0.85)';
+                          }}
+                          onPointerUp={(e) => e.currentTarget.style.transform = 'scale(1)'}
                         >
                           <Plus size={13} />
                         </button>
@@ -222,12 +249,25 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onNavigate }) => {
                       <button
                         onClick={() => removeFromCart(item.product.id)}
                         aria-label="Artikel entfernen"
+                        title="Entfernen"
                         style={{
                           background: 'none',
                           border: 'none',
-                          color: '#EF4444',
+                          color: '#94A3B8',
                           cursor: 'pointer',
-                          padding: '0.25rem'
+                          padding: '0.35rem',
+                          borderRadius: '4px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          transition: 'color var(--motion-micro) var(--ease-out-expo), transform var(--motion-micro) var(--ease-out-expo)'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.color = '#EF4444';
+                          e.currentTarget.style.transform = 'scale(1.1)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.color = '#94A3B8';
+                          e.currentTarget.style.transform = 'scale(1)';
                         }}
                       >
                         <Trash2 size={16} />

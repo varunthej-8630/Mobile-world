@@ -31,7 +31,7 @@ export const DeviceSupportPage: React.FC<DeviceSupportPageProps> = ({ onNavigate
 
   return (
     <div style={{ backgroundColor: '#F5F6F8', paddingBottom: '6rem' }}>
-      <div style={{ backgroundColor: '#101318', color: '#FFFFFF', padding: '5rem 0' }}>
+      <div style={{ backgroundColor: '#101318', color: '#FFFFFF', padding: '7.5rem 0 4.5rem' }}>
         <div className="container" style={{ maxWidth: '850px', textAlign: 'center' }}>
           <span className="section-eyebrow" style={{ color: '#7096FF' }}>Persönliche Benutzerdienstleistungen</span>
           <h1 style={{
@@ -89,8 +89,8 @@ export const DeviceSupportPage: React.FC<DeviceSupportPageProps> = ({ onNavigate
           className="p-5 sm:p-7 md:p-10"
           style={{
             backgroundColor: '#FFFFFF',
-            borderRadius: '20px',
-            border: '1px solid #DFE3E9',
+            borderRadius: '24px',
+            border: '1px solid #E8E8E8',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
@@ -108,18 +108,20 @@ export const DeviceSupportPage: React.FC<DeviceSupportPageProps> = ({ onNavigate
             </p>
           </div>
 
-          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
             <a
               href="https://wa.me/41783448888?text=Hallo%20Mobile%20World,%20ich%20benötige%20Unterstützung%20bei%20einer%20Datenübertragung."
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-primary"
+              className="btn btn-whatsapp"
+              style={{ borderRadius: '9999px', padding: '0.55rem 1.25rem' }}
             >
-              <MessageSquare size={16} /> WhatsApp Termin
+              <MessageSquare size={16} /> <span>WhatsApp Termin</span>
             </a>
             <button
               onClick={() => onNavigate('/contact')}
               className="btn btn-secondary"
+              style={{ borderRadius: '9999px', padding: '0.55rem 1.25rem', border: '1px solid #E8E8E8' }}
             >
               Filiale Seebach anfragen
             </button>

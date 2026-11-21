@@ -8,20 +8,29 @@ interface LocationsPageProps {
 
 export const LocationsPage: React.FC<LocationsPageProps> = ({ onNavigate }) => {
   return (
-    <div style={{ backgroundColor: '#F5F6F8', paddingBottom: '6rem' }}>
-      <div style={{ backgroundColor: '#101318', color: '#FFFFFF', padding: '5rem 0' }}>
-        <div className="container" style={{ maxWidth: '850px', textAlign: 'center' }}>
-          <span className="section-eyebrow" style={{ color: '#7096FF' }}>Filialnetz im Kanton Zürich</span>
+    <div style={{ backgroundColor: '#F4F4F4', paddingBottom: '6rem' }}>
+      {/* Hero (Raphus Style) */}
+      <div 
+        className="bg-gradient-shaph bg-white border-b border-[#E8E8E8]"
+        style={{
+          paddingTop: 'clamp(7.5rem, 12vh, 9.25rem)',
+          paddingBottom: '3.5rem'
+        }}
+      >
+        <div className="container" style={{ maxWidth: '850px', textAlign: 'center', position: 'relative', zIndex: 10 }}>
+          <span className="badge bg-secondary-subtle mb-3">Filialnetz im Kanton Zürich</span>
           <h1 style={{
             fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
-            color: '#FFFFFF',
+            color: '#1B1D1E',
             fontFamily: 'var(--font-heading)',
+            fontWeight: 800,
             marginBottom: '1.25rem',
-            lineHeight: 1.15
+            lineHeight: 1.15,
+            letterSpacing: '-0.02em'
           }}>
-            Unsere Standorte &amp; Filialen
+            Unsere Standorte &amp; <em className="font-instrument text-[#4928FD]">Filialen</em>
           </h1>
-          <p style={{ color: '#94A3B8', fontSize: '1.2rem', lineHeight: 1.6 }}>
+          <p style={{ color: '#4B5563', fontSize: '1.2rem', lineHeight: 1.6 }}>
             Sie finden Mobile World an 4 Standorten in Zürich: Seebach (Hauptwerkstatt), Bellevue-Stadelhofen, Rüti ZH und Oberengstringen.
           </p>
         </div>
@@ -36,7 +45,7 @@ export const LocationsPage: React.FC<LocationsPageProps> = ({ onNavigate }) => {
               style={{
                 backgroundColor: '#FFFFFF',
                 borderRadius: '24px',
-                border: b.isHeadquarters ? '2px solid #174CFF' : '1px solid #DFE3E9',
+                border: b.isHeadquarters ? '2px solid #4928FD' : '1px solid #E8E8E8',
                 overflow: 'hidden',
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
@@ -48,14 +57,16 @@ export const LocationsPage: React.FC<LocationsPageProps> = ({ onNavigate }) => {
                 <img
                   src={b.imageUrl}
                   alt={b.name}
+                  loading="lazy"
+                  decoding="async"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
                 {b.isHeadquarters && (
-                  <span className="badge badge-blue" style={{
+                  <span className="badge badge-purple" style={{
                     position: 'absolute',
                     top: '16px',
                     left: '16px',
-                    backgroundColor: '#174CFF',
+                    backgroundColor: '#4928FD',
                     color: '#FFFFFF'
                   }}>
                     Hauptwerkstatt &amp; Store
@@ -75,22 +86,22 @@ export const LocationsPage: React.FC<LocationsPageProps> = ({ onNavigate }) => {
 
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', fontSize: '0.925rem', marginBottom: '1.5rem', color: '#475569' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-                      <MapPin size={18} color="#174CFF" />
+                      <MapPin size={18} color="#4928FD" />
                       <span>{b.address}, {b.postalCode} {b.city}</span>
                     </div>
 
                     <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.65rem' }}>
-                      <Clock size={18} color="#174CFF" style={{ flexShrink: 0, marginTop: '2px' }} />
+                      <Clock size={18} color="#4928FD" style={{ flexShrink: 0, marginTop: '2px' }} />
                       <div>
-                        <div>Mo–Fr: {b.openingHours.weekdays}</div>
-                        <div>Sa: {b.openingHours.saturday}</div>
+                        <div>Mo–Fr: <strong>{b.openingHours.weekdays}</strong></div>
+                        <div>Sa: <strong>{b.openingHours.saturday}</strong></div>
                         <div>So: {b.openingHours.sunday}</div>
                       </div>
                     </div>
 
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-                      <Phone size={18} color="#174CFF" />
-                      <a href={`tel:${b.phone.replace(/\s+/g, '')}`} style={{ color: '#174CFF', fontWeight: 600 }}>
+                      <Phone size={18} color="#4928FD" />
+                      <a href={`tel:${b.phone.replace(/\s+/g, '')}`} style={{ color: '#4928FD', fontWeight: 600 }}>
                         {b.phone}
                       </a>
                     </div>
@@ -122,29 +133,35 @@ export const LocationsPage: React.FC<LocationsPageProps> = ({ onNavigate }) => {
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
                   <a
                     href={b.googleMapsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn btn-primary"
+                    className="btn-raphus-slide btn-raphus-slide-filled"
+                    style={{ minHeight: '46px', fontSize: '0.875rem' }}
                   >
-                    <MapPin size={16} /> Route in Google Maps <ExternalLink size={14} />
+                    <span className="btn-slide-badge"><MapPin size={14} className="btn-slide-icon" /></span>
+                    <span className="btn-slide-text">Route in Google Maps</span>
                   </a>
 
                   {b.isHeadquarters ? (
                     <button
                       onClick={() => onNavigate('/locations/seebach')}
-                      className="btn btn-secondary"
+                      className="btn-raphus-slide btn-raphus-slide-dark"
+                      style={{ minHeight: '46px', fontSize: '0.875rem' }}
                     >
-                      Filial-Profil Seebach <ArrowRight size={15} />
+                      <span className="btn-slide-badge"><ArrowRight size={14} className="btn-slide-icon" /></span>
+                      <span className="btn-slide-text">Filial-Profil Seebach</span>
                     </button>
                   ) : (
                     <button
                       onClick={() => onNavigate('/repair-prices')}
-                      className="btn btn-secondary"
+                      className="btn-raphus-slide btn-raphus-slide-dark"
+                      style={{ minHeight: '46px', fontSize: '0.875rem' }}
                     >
-                      Reparatur anfragen
+                      <span className="btn-slide-badge"><ArrowRight size={14} className="btn-slide-icon" /></span>
+                      <span className="btn-slide-text">Reparatur anfragen</span>
                     </button>
                   )}
                 </div>

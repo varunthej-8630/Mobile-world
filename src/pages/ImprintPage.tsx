@@ -7,7 +7,7 @@ interface ImprintPageProps {
 
 export const ImprintPage: React.FC<ImprintPageProps> = ({ onNavigate }) => {
   return (
-    <div className="bg-porcelain py-12 md:py-16">
+    <div className="bg-porcelain pt-28 md:pt-32 pb-16">
       <div className="container-custom max-w-4xl">
         <div className="text-xs text-graphite/50 mb-6 flex items-center gap-2">
           <button onClick={() => onNavigate('/')} className="hover:text-cobalt">Startseite</button>

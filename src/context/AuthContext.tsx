@@ -4,8 +4,9 @@ import { mockDb } from '../data/mockDb';
 
 interface AuthContextType {
   user: UserAccount | null;
-  login: (email: string, name?: string) => void;
+  login: (email: string, name?: string, role?: UserAccount['role']) => void;
   register: (name: string, email: string, phone?: string) => void;
+  updateProfile: (updates: Partial<UserAccount>) => boolean;
   logout: () => void;
   isAuthenticated: boolean;
 }
@@ -19,15 +20,25 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setUser(mockDb.getCurrentUser());
   }, []);
 
-  const login = (email: string, name?: string) => {
-    const logged = mockDb.loginUser(email, name || 'Geschätzter Kunde');
+  const login = (email: string, name?: string, role: UserAccount['role'] = 'customer') => {
+    const logged = mockDb.loginUser(email, name || 'Geschätzter Kunde', role);
     setUser(logged);
   };
 
   const register = (name: string, email: string, phone?: string) => {
-    const registered = mockDb.loginUser(email, name);
+    const registered = mockDb.loginUser(email, name, 'customer');
     if (phone) registered.phone = phone;
+    mockDb.updateUser({ phone });
     setUser(registered);
+  };
+
+  const updateProfile = (updates: Partial<UserAccount>): boolean => {
+    const updated = mockDb.updateUser(updates);
+    if (updated) {
+      setUser({ ...updated });
+      return true;
+    }
+    return false;
   };
 
   const logout = () => {
@@ -41,6 +52,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         user,
         login,
         register,
+        updateProfile,
         logout,
         isAuthenticated: !!user
       }}

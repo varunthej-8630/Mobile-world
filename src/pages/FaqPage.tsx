@@ -28,7 +28,7 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onNavigate }) => {
 
   return (
     <div style={{ backgroundColor: '#F5F6F8', paddingBottom: '6rem' }}>
-      <div style={{ backgroundColor: '#101318', color: '#FFFFFF', padding: '5rem 0' }}>
+      <div style={{ backgroundColor: '#101318', color: '#FFFFFF', padding: '7.5rem 0 4rem' }}>
         <div className="container" style={{ maxWidth: '850px', textAlign: 'center' }}>
           <span className="section-eyebrow" style={{ color: '#7096FF' }}>Hilfe &amp; Antworten</span>
           <h1 style={{
@@ -90,16 +90,16 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onNavigate }) => {
               key={tab.id}
               onClick={() => setActiveCategory(tab.id)}
               style={{
-                padding: '0.5rem 1rem',
-                borderRadius: '20px',
-                backgroundColor: activeCategory === tab.id ? '#174CFF' : '#FFFFFF',
+                padding: '0.45rem 1.15rem',
+                borderRadius: '9999px',
+                backgroundColor: activeCategory === tab.id ? '#1B1D1E' : '#FFFFFF',
                 border: '1px solid',
-                borderColor: activeCategory === tab.id ? '#174CFF' : '#E2E6EC',
-                color: activeCategory === tab.id ? '#FFFFFF' : '#334155',
+                borderColor: activeCategory === tab.id ? '#1B1D1E' : '#E8E8E8',
+                color: activeCategory === tab.id ? '#FFFFFF' : '#1B1D1E',
                 fontWeight: 600,
                 fontSize: '0.85rem',
                 cursor: 'pointer',
-                transition: 'all 0.15s ease'
+                transition: 'all 0.18s ease'
               }}
             >
               {tab.label}
@@ -109,66 +109,44 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onNavigate }) => {
 
         {/* FAQ Accordion List */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          {filteredFaqs.map(faq => {
+          {filteredFaqs.map((faq, idx) => {
             const isOpen = openIds.includes(faq.id);
             return (
               <div
                 key={faq.id}
+                className="accordion-item"
                 style={{
-                  backgroundColor: '#FFFFFF',
-                  borderRadius: '16px',
-                  border: '1px solid #DFE3E9',
-                  overflow: 'hidden',
-                  transition: 'box-shadow 0.15s ease'
+                  animation: 'staggerFadeUp var(--motion-reveal) var(--ease-out-expo) backwards',
+                  animationDelay: `${Math.min(idx * 40, 320)}ms`
                 }}
               >
                 <button
                   onClick={() => toggleFaq(faq.id)}
                   aria-expanded={isOpen}
-                  style={{
-                    width: '100%',
-                    padding: '1.5rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    gap: '1rem',
-                    background: 'none',
-                    border: 'none',
-                    textAlign: 'left',
-                    cursor: 'pointer',
-                    color: '#101318'
-                  }}
+                  className="accordion-trigger"
                 >
                   <span style={{ fontSize: '1.1rem', fontWeight: 700, fontFamily: 'var(--font-heading)' }}>
                     {faq.question}
                   </span>
-                  <div style={{
-                    backgroundColor: isOpen ? 'rgba(23, 76, 255, 0.1)' : '#F1F5F9',
-                    color: isOpen ? '#174CFF' : '#64748B',
-                    borderRadius: '50%',
-                    width: '32px',
-                    height: '32px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0
-                  }}>
-                    {isOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+                  <div className={`accordion-chevron ${isOpen ? 'is-open' : ''}`}>
+                    <ChevronDown size={18} />
                   </div>
                 </button>
 
-                {isOpen && (
-                  <div style={{
-                    padding: '0 1.5rem 1.5rem',
-                    color: '#475569',
-                    fontSize: '0.95rem',
-                    lineHeight: 1.6,
-                    borderTop: '1px solid #F1F5F9',
-                    paddingTop: '1rem'
-                  }}>
-                    {faq.answer}
+                <div className={`accordion-collapse ${isOpen ? 'is-open' : ''}`}>
+                  <div className="accordion-collapse-inner">
+                    <div style={{
+                      padding: '0 1.5rem 1.5rem',
+                      color: '#475569',
+                      fontSize: '0.95rem',
+                      lineHeight: 1.6,
+                      borderTop: '1px solid #F1F5F9',
+                      paddingTop: '1rem'
+                    }}>
+                      {faq.answer}
+                    </div>
                   </div>
-                )}
+                </div>
               </div>
             );
           })}

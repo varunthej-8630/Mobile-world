@@ -10,34 +10,29 @@ export const SeebachLocationPage: React.FC<SeebachLocationPageProps> = ({ onNavi
   const seebach = BRANCHES[0];
 
   return (
-    <div style={{ backgroundColor: '#F5F6F8', paddingBottom: '6rem' }}>
-      {/* Hero */}
-      <div style={{ backgroundColor: '#101318', color: '#FFFFFF', padding: '5rem 0' }}>
-        <div className="container" style={{ maxWidth: '850px', textAlign: 'center' }}>
-          <div style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.4rem',
-            backgroundColor: 'rgba(23, 76, 255, 0.2)',
-            color: '#7096FF',
-            padding: '0.35rem 0.85rem',
-            borderRadius: '20px',
-            fontSize: '0.8rem',
-            fontWeight: 700,
-            marginBottom: '1rem'
-          }}>
-            <MapPin size={14} /> HAUPTSITZ &amp; ZENTRALE WERKSTATT
-          </div>
+    <div style={{ backgroundColor: '#F4F4F4', paddingBottom: '6rem' }}>
+      {/* Hero (Raphus Style) */}
+      <div 
+        className="bg-gradient-shaph bg-white border-b border-[#E8E8E8]"
+        style={{
+          paddingTop: 'clamp(7.5rem, 12vh, 9.25rem)',
+          paddingBottom: '3.5rem'
+        }}
+      >
+        <div className="container" style={{ maxWidth: '850px', textAlign: 'center', position: 'relative', zIndex: 10 }}>
+          <span className="badge bg-secondary-subtle mb-3">Hauptsitz &amp; Zentrale Werkstatt</span>
           <h1 style={{
             fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
-            color: '#FFFFFF',
+            color: '#1B1D1E',
             fontFamily: 'var(--font-heading)',
+            fontWeight: 800,
             marginBottom: '1.25rem',
-            lineHeight: 1.15
+            lineHeight: 1.15,
+            letterSpacing: '-0.02em'
           }}>
-            Mobile World ZH Seebach
+            Mobile World ZH <em className="font-instrument text-[#4928FD]">Seebach</em>
           </h1>
-          <p style={{ color: '#94A3B8', fontSize: '1.2rem', lineHeight: 1.6 }}>
+          <p style={{ color: '#4B5563', fontSize: '1.2rem', lineHeight: 1.6 }}>
             Schaffhauserstrasse 455, 8052 Zürich • Telefon: +41 44 543 63 33 • WhatsApp: +41 78 344 88 88
           </p>
         </div>
@@ -51,26 +46,32 @@ export const SeebachLocationPage: React.FC<SeebachLocationPageProps> = ({ onNavi
           gap: '1.5rem',
           marginBottom: '3rem'
         }}>
-          <div style={{ borderRadius: '16px', overflow: 'hidden', border: '1px solid #DFE3E9', height: '240px' }}>
+          <div style={{ borderRadius: '20px', overflow: 'hidden', border: '1px solid #E8E8E8', height: '240px' }}>
             <img
               src="/assets/modern-mobile-world-storefront-at-dusk.png"
               alt="Aussenansicht Mobile World Seebach Schaffhauserstrasse 455"
+              loading="lazy"
+              decoding="async"
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
           </div>
 
-          <div style={{ borderRadius: '16px', overflow: 'hidden', border: '1px solid #DFE3E9', height: '240px' }}>
+          <div style={{ borderRadius: '20px', overflow: 'hidden', border: '1px solid #E8E8E8', height: '240px' }}>
             <img
               src="/assets/modern-mobile-world-store-interior.png"
               alt="Innenansicht Store Mobile World Zürich"
+              loading="lazy"
+              decoding="async"
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
           </div>
 
-          <div style={{ borderRadius: '16px', overflow: 'hidden', border: '1px solid #DFE3E9', height: '240px' }}>
+          <div style={{ borderRadius: '20px', overflow: 'hidden', border: '1px solid #E8E8E8', height: '240px' }}>
             <img
               src="/assets/phone-consultation-at-mobile-shop.png"
               alt="Kundenberatung am Schalter"
+              loading="lazy"
+              decoding="async"
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
           </div>
@@ -82,7 +83,7 @@ export const SeebachLocationPage: React.FC<SeebachLocationPageProps> = ({ onNavi
           style={{
             backgroundColor: '#FFFFFF',
             borderRadius: '24px',
-            border: '1px solid #DFE3E9',
+            border: '1px solid #E8E8E8',
             boxShadow: '0 12px 36px rgba(16, 19, 24, 0.05)',
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
